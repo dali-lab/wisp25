@@ -1,4 +1,6 @@
-# CRUD Template - Web Frontend - React Query / Zustand
+# 👩🏾‍💻 Big Green Planner - WISP 25 Project
+
+[Project Description]
 
 This repository is an optional frontend starter for new DALI React projects. Installation and setup instructions are included below. You should eventually customize this README file with project-specific documentation.
 
@@ -20,29 +22,28 @@ This repository is an optional frontend starter for new DALI React projects. Ins
 - [TypeScript](https://www.typescriptlang.org/docs/)
 - [Vite](https://vitejs.dev/)
 
-#### External Packages
-- [Description of any notable added services]
+#### Packages 📦
+* [List of notable packages with links]
 
 ### Style
 [Describe notable code style conventions]
 
 We are using [typically a configuration like [CS52's React-Native ESLint Configuration](https://gist.github.com/timofei7/c8df5cc69f44127afb48f5d1dffb6c84) or [CS52's ES6 and Node ESLint Configuration](https://gist.github.com/timofei7/21ac43d41e506429495c7368f0b40cc7)]
 
+### Data Models
+[Brief description of typical data models.]
+
+[Detailed description should be moved to the repo's Wiki page]
+
 ### File Structure
-    .
-    ├── ...    
-    ├── public
-    ├── src          
-    │   └── api                # React Query server state cache  
-    │   └── assets             # static assets   
-    │   └── components         # reusable components across several screens
-    │   └── screens            # individual pages
-    │   └── store              # Zustand client state
-    │   └── types              # TS types
-    │   └── utils              # utility folder containing helper files
-    ├── tsconfig.json          # TypeScript configuration
-    ├── package.json           # npm config
-    └── ...
+
+```
+├──[Top Level]/                  # root directory
+|  └──[File]                     # brief description of file
+|  └──[Folder1]/                 # brief description of folder 
+|  └──[Folder2]/                 # brief description of folder
+[etc...]
+```
 
 For more detailed documentation on our file structure and specific functions in the code, feel free to check the project files themselves.
 
@@ -74,7 +75,8 @@ Your app is ready to be deployed!
 
 ESLint is set up in this project. To keep code clean, always remember to run `npm run lint` and fix any lint problems before merging into master.
 
-## Deployment
+
+## Deployment 🚀
 [Where is the app deployed? i.e. Expo, Surge, TestFlight etc.]
 
 [What are the steps to re-deploy the project with any new changes?]
@@ -84,14 +86,8 @@ ESLint is set up in this project. To keep code clean, always remember to run `np
 ## Authors
 * Firstname Lastname 'YY, role
 
-## Acknowledgments
+## Acknowledgments 🤝
 We would like to thank [anyone you would like to acknowledge] for [what you would like to acknowledge them for].
 
 ---
 Designed and developed by [@DALI Lab](https://github.com/dali-lab)
-
-### Template
-
-- Eric Lu '25
-
-Additional credit goes to Adam McQuilkin '22,  Thomas Monfre '21, Tyler Vergho '23 for developing the original DALI [CRUD Template Frontend](https://github.com/dali-lab/crud-template-frontend), which this starter pack was evolved from.
