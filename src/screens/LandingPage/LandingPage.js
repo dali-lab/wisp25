@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import MenuBar from "./MenuBar";
-import "./LandingPage.css";
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import PeopleOutlineRoundedIcon from "@mui/icons-material/PeopleOutlineRounded";
-import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
+import React, { useState } from 'react';
+import MenuBar from './MenuBar';
+import './LandingPage.css';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import PeopleOutlineRoundedIcon from '@mui/icons-material/PeopleOutlineRounded';
+import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
 export default function LandingPage() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -16,7 +16,7 @@ export default function LandingPage() {
   return (
     <div className="container">
       <nav className="navbar">
-      <div className="hamburger" onClick={handleMenuToggle}>
+        <div className="hamburger" onClick={handleMenuToggle}>
           <MenuRoundedIcon sx={{ fontSize: 30 }} />
         </div>
         <h1 className="title">Big Green Planner</h1>

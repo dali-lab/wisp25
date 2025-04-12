@@ -1,14 +1,14 @@
-import React from "react";
-import "./MenuBar.css";
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
-import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
-import PeopleOutlineRoundedIcon from "@mui/icons-material/PeopleOutlineRounded";
-import PersonIcon from "@mui/icons-material/Person";
+import React from 'react';
+import './MenuBar.css';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
+import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
+import PeopleOutlineRoundedIcon from '@mui/icons-material/PeopleOutlineRounded';
+import PersonIcon from '@mui/icons-material/Person';
 
 export default function MenuBar({ isOpen }) {
-    return (
-      <div className={`menuBar ${isOpen ? "open" : "closed"}`}>
+  return (
+    <div className={`menuBar ${isOpen ? 'open' : 'closed'}`}>
       <ul className="menuItems">
         <li className="menuItem">
           <a href="#">
