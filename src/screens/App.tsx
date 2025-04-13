@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import LandingPage from '../screens/LandingPage/LandingPage';
-import CourseSearch from '../screens/LandingPage/LandingPage';
-import SavedCourses from '../screens/CoffeeChat/CoffeeChat';
-import CourseLoadTester from '../screens/CoffeeChat/CoffeeChat';
+import CourseSearch from '../screens/CourseSearch';
+import SavedCourses from '../screens/SavedCourses';
+import CourseLoadTester from '../screens/CourseLoadTester';
 import CoffeeChat from '../screens/CoffeeChat/CoffeeChat';
-import ExploreCoffeeChat from '../screens/CoffeeChat/CoffeeChat';
-import RegisterCoffeeChat from '../screens/CoffeeChat/CoffeeChat';
+import ExploreCoffeeChat from '../screens/CoffeeChat/ExploreCoffeeChat';
+import RegisterCoffeeChat from '../screens/CoffeeChat/RegisterCoffeeChat';
 
 const App: React.FC = () => {
   return (
