@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import LandingPage from '../screens/LandingPage';
+import LandingPage from '../screens/LandingPage/LandingPage';
 import CourseSearch from '../screens/CourseSearch';
 import SavedCourses from '../screens/SavedCourses';
 import CourseLoadTester from '../screens/CourseLoadTester';
