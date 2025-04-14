@@ -29,14 +29,22 @@ body {
     color: black;
     border: #66451C;
     border-radius: 2px;
-    height: 320px;
     border: 4px solid #66451C;
     position: relative;
+    min-height: 320px; /* lets it grow if content needs more */
+    height: auto; /* allows height to expand with content */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    box-sizing: border-box;
   }
   
   .crosslisted{
     margin-top: 200px;
     text-decoration: underline;
+  }
+
+  .coursedescription{
+    margin-top: 10px;
   }
   
   .prereqs{
