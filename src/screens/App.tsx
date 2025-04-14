@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import LandingPage from '../screens/CoffeeChat/CoffeeChat';
-import CourseSearch from '../screens/CoffeeChat/CoffeeChat';
+import CourseSearch from '../screens/CourseSearch';
 import SavedCourses from '../screens/CoffeeChat/CoffeeChat';
 import CourseLoadTester from '../screens/CoffeeChat/CoffeeChat';
 import CoffeeChat from '../screens/CoffeeChat/CoffeeChat';

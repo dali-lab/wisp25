@@ -2,6 +2,7 @@
   "name": "crud-template-frontend-query",
   "version": "1.0.0",
   "description": "DALI Lab Frontend CRUD template w/ TypeScript, React Query, Zustand",
+  "proxy": "https://api.dartmouth.edu",
   "productionURL": "https://your-api-url.here",
   "productionClientURL": "https://your-app-url.here",
   "repository": "https://github.com/dali-lab/crud-template-frontend-postgres",
