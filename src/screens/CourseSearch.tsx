@@ -42,11 +42,16 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
   useEffect(() => {
     axios.get('/api/academic/courses', {
       headers: {
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0NDYwMjA4OCwiaWF0IjoxNzQ0NTkxMjg4LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.fCU-ff0AJsaGiQ4i9OTYgS-KB7K10tr_wOzeExGag_VGEiTbcGosYDQQJiSiHAACaoAUqkiK8RiKRd-ElUL30P8mUgK9RLrvpZ_EsZDr0XogHuZmJKOC0FCUZNx6zEmYAZAcXizSOTg2zHibxGV8l2NYrfOb5mWuOPVWwEmEaXf32CwOdnjY236uVkH-qd_fmc5_TS-lgJe4lW1bSQx3Au_NVcA1vDjPS60UZK0li9KhcvUijc_Mi_I2lpxU8yxX0En10Pslf-MY3S7AiUAZXU70ENUsQ309yRxr0fBHDMytj5m9TFtJ-uLig9tYVotl4urGRulni4_NCwa8wV9B9w` // use a secure method for storing tokens!
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0NDYwMzk3OCwiaWF0IjoxNzQ0NTkzMTc4LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.IPDpV6K7_DvcnJgkF67Y6YerOUgf1AZW28h6QUouIx-rFgKMi6Lu-GPxviwivPMnW-sDcsM5hv23XooxBSsM0M9uNktj-pwTmGAU1Dw4_CmI3rofF9EWEeMgAjser89vpysvRD3Ll6dWtHjOwBP8p0I9SR9T0t7i6LLL3YNL3FMQ6G7I8Re2WTMtxE9z91IgL-4TtD9ilwnAqeaFOlvnJT9qHj3HPmubZX8BlIxL07ckDUF3Dh9qUnfYri6wu2qlX9l7toA7yEvaKJm77De5akzw2tpMrHcMLqrpaV71BVLu3ezFGZkuDrG3Gn9nWtNYjJBUjprz0ZfVa0efbHeoXA`
       }
     })
     .then((response) => {
-      setCourses(response.data);
+      // Validate if the response is an array before setting the state
+      if (Array.isArray(response.data)) {
+        setCourses(response.data);
+      } else {
+        console.error("Invalid response format:", response.data);
+      }
     })
     .catch((error) => {
       console.error("API Error:", error);
