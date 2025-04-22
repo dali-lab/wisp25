@@ -5,7 +5,7 @@ const coffeeSchema = new mongoose.Schema({
   name: String,
   gradYear: Number,
   email: String,
-  courses_taken: Array,
+  coursesTaken: Array,
   major: String,
   minor: String,
   academicInterest: String,
