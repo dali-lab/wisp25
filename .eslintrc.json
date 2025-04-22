@@ -48,6 +48,7 @@
   },
   "plugins": [
     "@typescript-eslint",
+    "@typescript-eslint/parser",
     "import"
   ]
 }
