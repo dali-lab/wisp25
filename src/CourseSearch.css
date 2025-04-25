@@ -219,7 +219,6 @@ label {
 }
 
 .course-wrapper {
-  max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease-out, opacity 0.3s ease;
   opacity: 0;
@@ -343,4 +342,94 @@ label {
 
 .subject-tag{
   font-weight: normal;
+}
+
+
+.Course-Header-Rectangle{
+  background-color:#3B6838 ;
+  padding: 20px;
+  color: #F3F2DE;
+  font-weight: bold;
+  border-radius: 2px;
+  height: 50px;
+  border: 4px solid #66451C;
+  position: relative;
+}
+.Course-Info-Rectangle{
+  background-color: #F3F2DE;
+  padding: 20px;
+  color: black;
+  border-radius: 2px;
+  border: 3.5px solid #66451C;
+  border-top: none;
+  position: relative;
+  min-height: 320px; /* lets it grow if content needs more */
+  height: auto; /* allows height to expand with content */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  box-sizing: border-box;
+}
+.crosslisted{
+  margin-top: 200px;
+  text-decoration: underline;
+}
+.prereqs{
+  margin-top: 100px;
+}
+.courseinfoboxes{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  top: 100px;
+}
+.infobox-title{
+  font-size: 13px;
+  margin-bottom: 5px;
+  color: #66451C;
+  font-weight: bold;
+}
+.infobox-content{
+  background-color: #3B6838;
+  color: #F3F2DE;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  width: fit-content;
+  margin-top: 10px;
+}
+.figma-icon1{
+  position: absolute;
+  top: 25px;
+  right: 22px;
+  width: 35px;
+  height: 35px;
+}
+.figma-icon2{
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 30px;
+  height: 30px;
+}
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+.App-header {
+  background-color: #282C34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
