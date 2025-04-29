@@ -28,7 +28,6 @@ export default function RegisterPlaceholder() {
     const data = {
       ...formData,
       gradYear: formData.gradYear,
-      connections: formData.connections,
       courses_taken: formData.courses_taken.split(",").map((c) => c.trim()),
     };
 
