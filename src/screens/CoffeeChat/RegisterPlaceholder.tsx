@@ -6,12 +6,12 @@ export default function RegisterPlaceholder() {
     name: "",
     gradYear: 0,
     email: "",
+    linkedIn: "",
     courses_taken: "",
     major: "",
     minor: "",
     academicInterest: "",
     message: "",
-    connections: 0,
   });
 
   const handleChange = (
@@ -27,7 +27,6 @@ export default function RegisterPlaceholder() {
     const data = {
       ...formData,
       gradYear: formData.gradYear,
-      connections: formData.connections,
       courses_taken: formData.courses_taken.split(",").map((c) => c.trim()),
     };
 
@@ -44,12 +43,12 @@ export default function RegisterPlaceholder() {
           name: "",
           gradYear: 0,
           email: "",
+          linkedIn: "",
           courses_taken: "",
           major: "",
           minor: "",
           academicInterest: "",
           message: "",
-          connections: 0,
         });
       } else {
         const errorData = await res.json();
