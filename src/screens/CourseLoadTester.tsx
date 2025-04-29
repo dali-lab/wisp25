@@ -14,7 +14,7 @@ const CourseLoadTester = () => {
       <h1 className="page-name"> Course Load Tester </h1>
       <div className="main-container">
         <div className="course-container">
-          <h2 className="tester-container"> Saved Courses </h2>
+          <h2 > Saved Courses </h2>
           {cards.map((card) => (
             <Draggable key={card.id} bounds="parent">
               <div className="card-card">
@@ -23,8 +23,8 @@ const CourseLoadTester = () => {
             </Draggable>
           ))}
         </div>
-        <div className="tester-contianer">
-          <h2 className="container-label"> Test Course Load </h2>
+        <div className="tester-container">
+          <h2> Test Course Load </h2>
         </div>
       </div>
     </div>

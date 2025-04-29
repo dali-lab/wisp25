@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../components/contactCard.css';
+import './contactCard.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const ContactCard: React.FC = ({ }) => {
@@ -16,7 +16,7 @@ const ContactCard: React.FC = ({ }) => {
       <div className="student-card-wrapper">
         <div className="student-content">
           <div className="info-section">
-            <h2 className="info-title">Academic Background</h2>
+            <h2 className="info-title">Academic Interest</h2>
             <div className="info-box">
               I am currently studying math with a potential minor in International Relations. On campus, I am a tour guide and involved with the writing center.
             </div>
@@ -25,8 +25,8 @@ const ContactCard: React.FC = ({ }) => {
           <div className="info-section">
             <h2 className="info-title">Contact Info {studentId} </h2>
             <div className="info-box">
-              student.28@dartmouth.edu<br />
-              LinkedIn: student-2028
+              <p>student.28@dartmouth.edu</p>
+              <p>LinkedIn: student-2028</p>
             </div>
           </div>
         </div>

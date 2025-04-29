@@ -107,42 +107,43 @@ const ExploreCoffeeChat: React.FC = () => {
   };
  
   return (
-    <div className="container">
+    <div>
       <header>
         <h1>Coffee Chat Connection</h1>
       </header>
- 
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search by subject, major, or interest"
-          value={searchQuery}
-          onChange={handleSearchChange}
-        />
-      </div>
- 
-      <div className="categories">
-        {categories.map(category => (
-          <div
-            key={category}
-            className={`category ${category === activeCategory ? 'active' : ''}`}
-            onClick={() => handleCategoryClick(category)}
-          >
-            {category}
-          </div>
-        ))}
-      </div>
- 
-      <div className="students-list">
-        {filteredStudents.map(student => (
-          <StudentCard
-            key={student.id}
-            student={student}
+      <div className="container">
+        <div className="search-container">
+          <input
+            type="text"
+            className="search-input"
+            placeholder="Search by subject, major, or interest"
+            value={searchQuery}
+            onChange={handleSearchChange}
           />
-        ))}
+        </div>
+  
+        <div className="categories">
+          {categories.map(category => (
+            <div
+              key={category}
+              className={`category ${category === activeCategory ? 'active' : ''}`}
+              onClick={() => handleCategoryClick(category)}
+            >
+              {category}
+            </div>
+          ))}
+        </div>
+  
+        <div className="students-list">
+          {filteredStudents.map(student => (
+            <StudentCard
+              key={student.id}
+              student={student}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+      </div>
   );
 };
  
