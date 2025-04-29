@@ -5,12 +5,12 @@ const coffeeSchema = new mongoose.Schema({
   name: String,
   gradYear: Number,
   email: String,
+  linkedIn: String,
   coursesTaken: Array,
   major: String,
   minor: String,
   academicInterest: String,
   message: String,
-  connections: Number,
 });
 
 module.exports = mongoose.model("Connection", coffeeSchema);

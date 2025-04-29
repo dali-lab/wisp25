@@ -7,12 +7,12 @@ export default function RegisterPlaceholder() {
     name: "",
     gradYear: 0,
     email: "",
+    linkedIn: "",
     courses_taken: "",
     major: "",
     minor: "",
     academicInterest: "",
     message: "",
-    connections: 0,
   });
 
   const handleChange = (
@@ -46,12 +46,12 @@ export default function RegisterPlaceholder() {
           name: "",
           gradYear: 0,
           email: "",
+          linkedIn: "",
           courses_taken: "",
           major: "",
           minor: "",
           academicInterest: "",
           message: "",
-          connections: 0,
         });
       } else {
         const errorData = await res.json();
@@ -87,6 +87,13 @@ export default function RegisterPlaceholder() {
         placeholder="Email"
         type="email"
         required
+      />
+      <input
+        name="linkedIn"
+        value={formData.linkedIn}
+        onChange={handleChange}
+        placeholder="LinkedIn Profile"
+        type="url"
       />
       <input
         name="courses_taken"
