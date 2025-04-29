@@ -3,7 +3,6 @@ import React, { useState } from "react";
 
 export default function RegisterPlaceholder() {
   const [formData, setFormData] = useState({
-    id: 0,
     name: "",
     gradYear: 0,
     email: "",
@@ -42,7 +41,6 @@ export default function RegisterPlaceholder() {
       if (res.ok) {
         alert("Connection added!");
         setFormData({
-          id: 0,
           name: "",
           gradYear: 0,
           email: "",
