@@ -1,6 +1,5 @@
 body {
     background-color: #efeee7;
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     display: flex;
@@ -16,10 +15,11 @@ body {
   }
   
   .page-title-title {
+    font-family: 'Itim';
     text-align: center;
-    font-size: 24px;
-    color: #3B6838;
-    font-weight: 500;
+    font-size: 50px;
+    color: #2b4928;
+    font-weight: 600;
     margin-bottom: 16px;
   }
   
@@ -29,6 +29,7 @@ body {
     text-align: center;
     padding: 8px;
     border-radius: 6px;
+    font-family: Helvetica;
     font-weight: 600;
     margin-bottom: 24px;
   }
@@ -38,6 +39,7 @@ body {
     align-items: center;
     gap: 16px;
     margin-bottom: 16px;
+    font-family: Helvetica;
   }
   
   .form-label {

@@ -14,10 +14,10 @@ const RegisterCoffeeChat = () => {
 
   return (
     <div>
+      <div>
+        <h1 className="page-title-title"> Coffee Chat Connection </h1>
+      </div>
       <div className="container">
-        <div>
-          <h1 className="page-title-title"> Coffee Chat Connection </h1>
-        </div>
         {page === 1 && (
           <div className="first-page">
             <div className="section-header"> Contact Info </div>
@@ -50,6 +50,15 @@ const RegisterCoffeeChat = () => {
                 />
               </div>
 
+              <div className="form-group">
+                <label className="form-label"> Message </label>
+                <input
+                  type="text"
+                  placeholder="Enter here"
+                  className="form-input"
+                />
+              </div>
+
               <div className="button-container">
                 <button
                   type="submit"
@@ -66,6 +75,15 @@ const RegisterCoffeeChat = () => {
             <div className="section-header"> Academic Info </div>
         
             <form onSubmit={handleNext}>
+            <div className="form-group">
+                <label className="form-label"> Grad Year </label>
+                <input
+                  type="number"
+                  placeholder="Enter here"
+                  className="form-input"
+                />
+              </div>
+
               <div className="form-group">
                 <label className="form-label"> Major </label>
                 <input
@@ -74,9 +92,18 @@ const RegisterCoffeeChat = () => {
                   className="form-input"
                 />
               </div>
+
+              <div className="form-group">
+                <label className="form-label"> Minor </label>
+                <input
+                  type="text"
+                  placeholder="Enter here"
+                  className="form-input"
+                />
+              </div>
         
               <div className="form-group">
-                <label className="form-label"> Academic Background </label>
+                <label className="form-label"> Academic Interest </label>
                 <input
                   type="text"
                   placeholder="Enter here"
