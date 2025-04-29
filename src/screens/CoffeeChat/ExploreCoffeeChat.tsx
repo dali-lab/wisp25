@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../styles/CoffeeChat.css';
-import ContactCard from '../../components/contactCard';
+import { useNavigate } from 'react-router-dom';
 
 interface Student {
   id: number;
@@ -11,19 +11,30 @@ interface Student {
 
 interface StudentCardProps {
   student: Student;
-  onConnect: () => void;
 }
  
-const StudentCard: React.FC<StudentCardProps> = ({ student, onConnect }) => {
+const StudentCard: React.FC<StudentCardProps> = ({ student }) => {
+  const navigate = useNavigate();
+
+  const handleConnectClick = () => {
+    console.log(`Connecting with student ${student.id}`);
+    navigate('/contact', {
+      state: {
+        name: student.name,
+        studentId: student.id,
+      },
+    });
+  };
+
   return (
     <div className="student-card">
-      <div className="student-sidebar">
+      <div className="student-topbar">
         <h3 className="student-name">{student.name}</h3>
         <div className="student-major">{student.major}</div>
       </div>
       <div className="student-info">
         <p className="student-bio">{student.bio}</p>
-        <button className="connect-button" onClick={onConnect}>
+        <button className="connect-button" onClick={handleConnectClick}>
           <span>Connect Now</span>
         </button>
       </div>
@@ -34,7 +45,6 @@ const StudentCard: React.FC<StudentCardProps> = ({ student, onConnect }) => {
 const ExploreCoffeeChat: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeCategory, setActiveCategory] = useState<string>('All');
-  const [showDetail, setShowDetail] = useState(false);
  
   const students: Student[] = [
     {
@@ -96,11 +106,6 @@ const ExploreCoffeeChat: React.FC = () => {
     setActiveCategory(category);
   };
  
-  const handleConnectClick = (studentId: number) => {
-    console.log(`Connecting with student ${studentId}`);
-
-  };
- 
   return (
     <div className="container">
       <header>
@@ -134,15 +139,8 @@ const ExploreCoffeeChat: React.FC = () => {
           <StudentCard
             key={student.id}
             student={student}
-            onConnect={() => handleConnectClick(student.id)}
           />
         ))}
-      </div>
-      <div>
-        <ContactCard
-          name="name" onBack={function (): void {
-            throw new Error('Function not implemented.');
-          } }        />
       </div>
     </div>
   );
