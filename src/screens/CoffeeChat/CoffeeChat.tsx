@@ -4,7 +4,7 @@ import { Outlet, Link } from 'react-router-dom';
 const CoffeeChat: React.FC = () => {
   return (
     <div>
-      <h1>Chat Here</h1>
+      <h1 className="page-title">Coffee Chat Connection</h1>
       <ul>
         <li>
           <Link to="/coffeechat/ExploreCoffeeChat">Explore Coffee Chat</Link>
