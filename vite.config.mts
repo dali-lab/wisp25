@@ -6,6 +6,16 @@ import * as path from 'path';
 export default defineConfig({
   base: '/',
   plugins: [react()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://api.dartmouth.edu',
+        changeOrigin: true,
+        secure: true,
+        rewrite: path => path.replace(/^\/api/, '/api'),
+      },
+    },
+  },
   resolve: {
     // https://stackoverflow.com/a/73742188
     alias: [
