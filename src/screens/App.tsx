@@ -42,6 +42,7 @@ const App: React.FC = () => {
           <Route path="explorecoffeechat" element={<ExploreCoffeeChat />} />
           <Route path="registercoffeechattest" element={< RegisterPlaceholder/>} />
           </Route>
+          <Route path="/contact" element={<StudentContact />} />
         </Routes>
       </div>
     </Router>
