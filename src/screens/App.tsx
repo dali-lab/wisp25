@@ -8,6 +8,7 @@ import CoffeeChat from "../screens/CoffeeChat/CoffeeChat";
 import ExploreCoffeeChat from "../screens/CoffeeChat/ExploreCoffeeChat";
 import RegisterCoffeeChat from "../screens/CoffeeChat/RegisterCoffeeChat";
 import RegisterPlaceholder from "../screens/CoffeeChat/RegisterPlaceholder";
+import StudentContact from "../screens/CoffeeChat/StudentContact";
 
 const App: React.FC = () => {
   return (
