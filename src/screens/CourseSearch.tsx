@@ -4,6 +4,7 @@ import checkIcon from '../assets/check_icon.svg';
 import menuIcon from '../assets/menu_icon.svg';
 import dropDownIcon from '../assets/drop_.svg';
 import axios from 'axios';
+import { saveCourse, isCourseSaved } from '@/utils/courseStorage';
 
 interface Course {
   id: string;
@@ -42,7 +43,7 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
   useEffect(() => {
     axios.get('/api/academic/courses', {
       headers: {
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0NDczMjMyMiwiaWF0IjoxNzQ0NzIxNTIyLCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.GfAb36-RezqYvcMhlRE-WUFSmH78tnh92evKtlfsuPyfelYBSlo2E1mjEf1XIqE5wGuvTiM9uw0aoLI1JAPmvKGHgTiAfarsBKo7GKMv6GJ152RZRhhBUuFNWFe_ECwrog8lWxX0hicWLHLglrnH5RcxtGnDqq4lqSlM0iyHkG4QYeWDIhetvLGVrfH6AwbPOqdTuMoulABKU4Npmos94DSVH2s525IaOxi9f-GsfsdFvlRC1VDeI0wKNeNG06Sk_W0KUPpOAkDOOIHrSh5sMcXs3vbpgxIfYsVE96vvwG_RAqyZI47GgLt15Ul_m_SakbQvaY5Ngt4juIfgSeFXVw`
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OTY0IiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJHYWVsbGUgRS4gVmFsbWlyIiwiZXhwIjoxNzQ2NzU0NjA3LCJpYXQiOjE3NDY3NDM4MDcsImVtYWlsIjoiR2FlbGxlLkUuVmFsbWlyLjI4QGRhcnRtb3V0aC5lZHUifQ.ij2jML0CCcnnApWXeCch72ztLvWYL2amTGYjnAVKusOsVVOKtLK1jlHukxgkF7BoFcVXk9mM-Yywp1uPFTEjAxMHy3ckLADsEqoWuH0hVi4WJLLDWKJ7IBLjwl1AabgwsT3g1rMYA92dL0arPCjSVAtZkPnq5XDX4xTfj_EmQsyTGbg7ZI5q1-2Cc0jEdVeKSqYakIcvXKZETeOKFbd1k94Oa1_ZjiNaYWpgAqqAStyMwvbhwfGh5gvleua5ZhAwIXvDDl7DhdzgclSmDi04MrqNmD-jtQxiFNIFtdAiB0S7oXyFmT1je4VQ2X6pOlGoxuwH3fTdVrvNLTYxJcCedQ`
       }
     })
     .then((response) => {
@@ -72,6 +73,11 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
       ...prev,
       [subject]: !prev[subject]
     }));
+  };
+
+  const handleSaveCourse = (course: Course) => {
+    saveCourse(course);
+    alert(`${course.name} saved!`);
   };
 
   const removeSubject = (subjectToRemove: string) => {
@@ -124,6 +130,12 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
                       <h3 className='credit'>TLA</h3>
                       <img src={dropDownIcon} alt="Dropdown" className='drop-down' />
                     </div>
+                    <button
+                        disabled={isCourseSaved(course.id)}
+                        onClick={() => handleSaveCourse(course)}
+                    >
+                        {isCourseSaved(course.id) ? 'Saved' : 'Save'}
+                    </button>
                   </button>
               ))}
             </div>
@@ -132,7 +144,7 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
       ))}
     </div>
   );
-};
+  };
 
 const App: React.FC = () => {
   const [query, setQuery] = useState('');
