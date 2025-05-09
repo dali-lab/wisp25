@@ -90,6 +90,30 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
   const [openSubjects, setOpenSubjects] = useState<Record<string, boolean>>({});
   const [openCourses, setOpenCourses] = useState<Record<string, boolean>>({});
 
+  const [courseDetails, setCourseDetails] = useState<Record<string, any>>({});
+  const [courseMetadata, setCourseMetadata] = useState<Record<string, any>>({});
+
+
+const fetchCourseDetails = async (courseKey: string) => {
+  if (courseDetails[courseKey]) return;
+
+  try {
+    const response = await axios.get(`/api/academic/courses/${courseKey}`, {
+      headers: {
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0Njc2MjQ2MCwiaWF0IjoxNzQ2NzUxNjYwLCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.OyPo2pqhbejiccrdEkh9kP5Mu8QIf_RosEwOiVHgtY8nK0odPtXQyU0aPiVN6dS5ybOPMfErH5e7om6CEg3rF_IY5D5sauRKxpLZKehwShRTKenSifLZKu5TOFjBl4at7BXD3zhAMeKJRX52nmRrFsSaMNBBqpZDwyj2mfTbJHoKntD3mnTiUq3kj4ldhQ-kHn9b_l9HpaknEJI06-tmkYW9o-rUQi1yk5UqJojxFfJy4LK2SznNJfG0ezKhiw7J8MSpOVvoTziCWe8iiHDpbmUg7iU29lFaZH3uQc7x31reHoHVor_NH3D4uc2g1mUNDh4jehiwDzimkZdwCheuUA` // replace this
+      }
+    });
+
+    setCourseDetails(prev => ({
+      ...prev,
+      [courseKey]: response.data,
+    }));
+  } catch (err) {
+    console.error("Failed to fetch course details:", err);
+  }
+};
+
+
   useEffect(() => {
     const fetchSections = async () => {
       try {
@@ -101,7 +125,7 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
         while (hasMore) {
           const response = await axios.get('/api/academic/sections', {
             headers: {
-              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0Njc0MjAzMSwiaWF0IjoxNzQ2NzMxMjMxLCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.U1mg4MVJhDmdHe2Bzd8WIIhcVaASi3prx3MQ_YL8dZdCaY4Nf6mTqyivpMm1UeHC6Ox8pol_6eSfVF27wCGjFyS_kVju09tBRRLdkUduLc9aduW1ZAPD7UZcbXyYL6dM47illgI3CQO6iSSfg2B5mCTwUxok_rrGMNCnfn6DTsdXSbCOBGcIX9oLwqHp43p6QCuWeP-j79-gPrbgJNOZrI0TJfaRwEp6Ney8fjg66Mk42Sv9w1q22oqN5Bb1IfqIvIude0Sz1FXYdciMDN4xT0sDF9KS0PQYEpyacLJfaXBuIHVe-fEZQmZJMFGjPajmGiNwscNs6MfLeRj5v3-O7Q`
+              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0Njc2MjQ2MCwiaWF0IjoxNzQ2NzUxNjYwLCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.OyPo2pqhbejiccrdEkh9kP5Mu8QIf_RosEwOiVHgtY8nK0odPtXQyU0aPiVN6dS5ybOPMfErH5e7om6CEg3rF_IY5D5sauRKxpLZKehwShRTKenSifLZKu5TOFjBl4at7BXD3zhAMeKJRX52nmRrFsSaMNBBqpZDwyj2mfTbJHoKntD3mnTiUq3kj4ldhQ-kHn9b_l9HpaknEJI06-tmkYW9o-rUQi1yk5UqJojxFfJy4LK2SznNJfG0ezKhiw7J8MSpOVvoTziCWe8iiHDpbmUg7iU29lFaZH3uQc7x31reHoHVor_NH3D4uc2g1mUNDh4jehiwDzimkZdwCheuUA`
             },
             params: {
               'term.sis_term_code': termCode,
@@ -132,6 +156,33 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
     fetchSections();
   }, []);
 
+
+  
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get('/api/academic/courses', {
+          headers: {
+            Authorization: `Bearer YOUR_TOKEN_HERE`
+          }
+        });
+  
+        const metadataMap: Record<string, any> = {};
+        response.data.forEach((course: any) => {
+          const key = `${course.subject_id}.${course.course_number}-${course.term_code_effective}`;
+          metadataMap[key] = course;
+        });
+  
+        setCourseMetadata(metadataMap);
+      } catch (error) {
+        console.error("Failed to fetch course metadata:", error);
+      }
+    };
+  
+    fetchCourses();
+  }, []);
+    
+
   useEffect(() => {
     const filtered = sections.filter(section => {
       const subjectMatch =
@@ -154,6 +205,8 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
       [subject]: !prev[subject]
     }));
   };
+
+
 
   const toggleCourse = (courseId: string) => {
     setOpenCourses(prev => ({
@@ -216,11 +269,27 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
     const building = firstSessionWithLocation?.location?.building?.name || "TBD";
     const room = firstSessionWithLocation?.location?.room || "TBD";
 
+    
+    const courseKey = `${section.subject_id}.${section.course_number}-${section.term.sis_term_code}`;
+    const courseMeta = courseMetadata[courseKey];
+const courseTitle = section.name || courseMeta?.title || 'Untitled';
+const courseDescription = courseDetails[courseKey]?.orc_description || courseMeta?.description || 'No description available.';
+const coursePrereqs = courseDetails[courseKey]?.prerequisites || courseMeta?.prerequisites || 'No prerequisites available.';
+
+
 
     return (
       <React.Fragment key={section.id}>
-        <button className='course-card' onClick={() => toggleCourse(section.id)}>
-          <h1 className='course-title'>{section.name}</h1>
+                  <button
+            className='course-card'
+            onClick={() => {
+              toggleCourse(section.id);
+              fetchCourseDetails(courseKey);
+            }}
+          >
+
+          <h1 className='course-title'>{section.name} + {courseTitle}</h1>
+          <h1>description + {courseDescription} + {coursePrereqs}</h1>
           {/* <h3>{section.course_id}</h3> */}
           <div className='credit-icon-column'>
             <h3 className='credit'>TLA</h3>
