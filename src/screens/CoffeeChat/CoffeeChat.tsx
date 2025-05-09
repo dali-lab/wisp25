@@ -12,6 +12,9 @@ const CoffeeChat: React.FC = () => {
         <li>
           <Link to="/coffeechat/RegisterCoffeeChat">Register Coffee Chat</Link>
         </li>
+        <li>
+          <Link to="/coffeechat/RegisterCoffeeChatTest">Coffee Chat Registration Test</Link>
+        </li>
       </ul>
       <Outlet />
     </div>
