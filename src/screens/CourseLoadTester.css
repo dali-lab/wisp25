@@ -1,4 +1,4 @@
-body {
+/* body {
     margin: 0;
     padding: 0;
     font-family: 'Itim';
@@ -59,4 +59,84 @@ body {
     height: 220 px;
     text-align: center;
 
+  } */
+
+  .container {
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    background-color: #f2f2ef;
+    min-height: 100vh;
+  }
+  
+  .title {
+    text-align: center;
+    color: #4b653d;
+    font-size: 24px;
+    margin-bottom: 2rem;
+  }
+  
+  .columns {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  
+  .column {
+    background-color: #e5eade;
+    padding: 1rem;
+    width: 40%;
+    border-radius: 8px;
+    min-height: 300px;
+  }
+  
+  h3 {
+    text-align: center;
+    color: black;
+  }
+  
+  .card {
+    background-color: #d8e9d0;
+    margin: 10px auto;
+    padding: 1rem;
+    border: 1px solid #555;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .card-title {
+    font-weight: bold;
+  }
+  
+  .book {
+    font-size: 30px;
+    margin-top: 10px;
+  }
+  
+  .warning {
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #d8e9d0;
+    border: 1px solid #555;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  .warning.red {
+    color: red;
+  }
+  
+  .warning.green {
+    color: #387d4b;
+  }
+  
+  .warning-icon {
+    font-size: 30px;
+    margin-top: 5px;
+  }
+  
+  .info-icon {
+    font-size: 20px;
+    margin-top: 5px;
   }
