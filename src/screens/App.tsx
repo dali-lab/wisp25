@@ -7,6 +7,8 @@ import CourseLoadTester from '../screens/CourseLoadTester';
 import CoffeeChat from '../screens/CoffeeChat/CoffeeChat';
 import ExploreCoffeeChat from '../screens/CoffeeChat/ExploreCoffeeChat';
 import RegisterCoffeeChat from '../screens/CoffeeChat/RegisterCoffeeChat';
+import RegisterPlaceholder from "../screens/CoffeeChat/RegisterPlaceholder";
+import StudentContact from "../screens/CoffeeChat/StudentContact";
 
 const App: React.FC = () => {
   return (
@@ -37,9 +39,11 @@ const App: React.FC = () => {
           <Route path="/savedCourses" element={<SavedCourses />} />
           <Route path="/courseloadtester" element={<CourseLoadTester />} />
           <Route path="coffeechat" element={<CoffeeChat />}>
-            <Route path="registercoffeechat" element={<RegisterCoffeeChat />} />
-            <Route path="explorecoffeechat" element={<ExploreCoffeeChat />} />
+          <Route path="registercoffeechat" element={<RegisterCoffeeChat />} />
+          <Route path="explorecoffeechat" element={<ExploreCoffeeChat />} />
+          <Route path="registercoffeechattest" element={< RegisterPlaceholder/>} />
           </Route>
+          <Route path="/contact" element={<StudentContact />} />
         </Routes>
       </div>
     </Router>

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import MenuBar from "../../components/MenuBar/MenuBar";
-import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
-import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import PeopleOutlineRoundedIcon from "@mui/icons-material/PeopleOutlineRounded";
-import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
-import "../../styles/LandingPage.css";
+import React, { useState } from 'react';
+import MenuBar from '../../components/MenuBar/MenuBar';
+import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
+import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import PeopleOutlineRoundedIcon from '@mui/icons-material/PeopleOutlineRounded';
+import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
+import '../../styles/LandingPage.css';
 
 const LandingPage: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
