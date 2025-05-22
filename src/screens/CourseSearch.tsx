@@ -95,12 +95,14 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
 
 
 const fetchCourseDetails = async (courseKey: string) => {
+  console.log("⏳ Fetching course details for:", courseKey);
+
   if (courseDetails[courseKey]) return;
 
   try {
     const response = await axios.get(`/api/academic/courses/${courseKey}`, {
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0Njc2MjQ2MCwiaWF0IjoxNzQ2NzUxNjYwLCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.OyPo2pqhbejiccrdEkh9kP5Mu8QIf_RosEwOiVHgtY8nK0odPtXQyU0aPiVN6dS5ybOPMfErH5e7om6CEg3rF_IY5D5sauRKxpLZKehwShRTKenSifLZKu5TOFjBl4at7BXD3zhAMeKJRX52nmRrFsSaMNBBqpZDwyj2mfTbJHoKntD3mnTiUq3kj4ldhQ-kHn9b_l9HpaknEJI06-tmkYW9o-rUQi1yk5UqJojxFfJy4LK2SznNJfG0ezKhiw7J8MSpOVvoTziCWe8iiHDpbmUg7iU29lFaZH3uQc7x31reHoHVor_NH3D4uc2g1mUNDh4jehiwDzimkZdwCheuUA` // replace this
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0Nzk2NzMzNSwiaWF0IjoxNzQ3OTU2NTM1LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.GOnfFd--KHty7xZMQRBxFMx2cnn3RuOMOeOe4c3HgpATPbOm6Rvp-3HotF_prLnxYongLp7wO1Z8IfmdXaGW1UZdPGULMLSlBov_Qh5UjvLO1KHe4d2vhN9DRessqQJ_SyY6dkGhn35MYdnb1maaLzJ-BAY9lZP98b484yndKOslB-BPbXZdfHwaVSv7VDquH_gSptcjZoQSUOXBRJwSu27DOx2_IXs57JMS1r_dATiHWDHszYIUGOZOttwfO5KUSZprDnpWey-mJ4pGQ2PkOCLYNhmuhzUxEybjYHh-jkxViCAB_VWtDUAtLQamPEZrWqvpyYciFFcJP2X6cVxptQ` // replace this
       }
     });
 
@@ -125,7 +127,7 @@ const fetchCourseDetails = async (courseKey: string) => {
         while (hasMore) {
           const response = await axios.get('/api/academic/sections', {
             headers: {
-              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0Njc2MjQ2MCwiaWF0IjoxNzQ2NzUxNjYwLCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.OyPo2pqhbejiccrdEkh9kP5Mu8QIf_RosEwOiVHgtY8nK0odPtXQyU0aPiVN6dS5ybOPMfErH5e7om6CEg3rF_IY5D5sauRKxpLZKehwShRTKenSifLZKu5TOFjBl4at7BXD3zhAMeKJRX52nmRrFsSaMNBBqpZDwyj2mfTbJHoKntD3mnTiUq3kj4ldhQ-kHn9b_l9HpaknEJI06-tmkYW9o-rUQi1yk5UqJojxFfJy4LK2SznNJfG0ezKhiw7J8MSpOVvoTziCWe8iiHDpbmUg7iU29lFaZH3uQc7x31reHoHVor_NH3D4uc2g1mUNDh4jehiwDzimkZdwCheuUA`
+              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0Nzk2NzMzNSwiaWF0IjoxNzQ3OTU2NTM1LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.GOnfFd--KHty7xZMQRBxFMx2cnn3RuOMOeOe4c3HgpATPbOm6Rvp-3HotF_prLnxYongLp7wO1Z8IfmdXaGW1UZdPGULMLSlBov_Qh5UjvLO1KHe4d2vhN9DRessqQJ_SyY6dkGhn35MYdnb1maaLzJ-BAY9lZP98b484yndKOslB-BPbXZdfHwaVSv7VDquH_gSptcjZoQSUOXBRJwSu27DOx2_IXs57JMS1r_dATiHWDHszYIUGOZOttwfO5KUSZprDnpWey-mJ4pGQ2PkOCLYNhmuhzUxEybjYHh-jkxViCAB_VWtDUAtLQamPEZrWqvpyYciFFcJP2X6cVxptQ`
             },
             params: {
               'term.sis_term_code': termCode,
@@ -155,20 +157,67 @@ const fetchCourseDetails = async (courseKey: string) => {
 
     fetchSections();
   }, []);
+  useEffect(() => {
+    fetchCourseDetails("AAAS.023-201503");
+  }, []);
+  
 
 
   
+  // useEffect(() => {
+  //   const fetchCourses = async () => {
+  //     try {
+  //       const response = await axios.get('/api/academic/courses', {
+  //         headers: {
+  //           Authorization: `Bearer YOUR_TOKEN_HERE`
+  //         }
+  //       });
+  
+  //       const metadataMap: Record<string, any> = {};
+  //       response.data.forEach((course: any) => {
+  //         const key = `${course.subject_id}.${course.course_number}-${course.term_code_effective}`;
+  //         metadataMap[key] = course;
+  //       });
+  
+  //       setCourseMetadata(metadataMap);
+  //     } catch (error) {
+  //       console.error("Failed to fetch course metadata:", error);
+  //     }
+  //   };
+  
+  //   fetchCourses();
+  // }, []);
+
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await axios.get('/api/academic/courses', {
-          headers: {
-            Authorization: `Bearer YOUR_TOKEN_HERE`
+        let allCourses: any[] = [];
+        let page = 1;
+        let hasMore = true;
+  
+        while (hasMore) {
+          const response = await axios.get('/api/academic/courses', {
+            headers: {
+              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0Nzk2NzMzNSwiaWF0IjoxNzQ3OTU2NTM1LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.GOnfFd--KHty7xZMQRBxFMx2cnn3RuOMOeOe4c3HgpATPbOm6Rvp-3HotF_prLnxYongLp7wO1Z8IfmdXaGW1UZdPGULMLSlBov_Qh5UjvLO1KHe4d2vhN9DRessqQJ_SyY6dkGhn35MYdnb1maaLzJ-BAY9lZP98b484yndKOslB-BPbXZdfHwaVSv7VDquH_gSptcjZoQSUOXBRJwSu27DOx2_IXs57JMS1r_dATiHWDHszYIUGOZOttwfO5KUSZprDnpWey-mJ4pGQ2PkOCLYNhmuhzUxEybjYHh-jkxViCAB_VWtDUAtLQamPEZrWqvpyYciFFcJP2X6cVxptQ`
+            },
+            params: {
+              is_active: true,
+              pagesize: 500,
+              page
+            }
+          });
+  
+          const data: any[] = response.data;
+          if (data.length > 0) {
+            allCourses = [...allCourses, ...data];
+            page++;
+          } else {
+            hasMore = false;
           }
-        });
+        }
   
         const metadataMap: Record<string, any> = {};
-        response.data.forEach((course: any) => {
+        allCourses.forEach((course: any) => {
           const key = `${course.subject_id}.${course.course_number}-${course.term_code_effective}`;
           metadataMap[key] = course;
         });
@@ -181,6 +230,7 @@ const fetchCourseDetails = async (courseKey: string) => {
   
     fetchCourses();
   }, []);
+  
     
 
   useEffect(() => {
@@ -252,6 +302,14 @@ const fetchCourseDetails = async (courseKey: string) => {
               {filteredSections
   .filter(section => section.subject_id === subject)
   .map(section => {
+      // ⬇️ ADD THIS HERE:
+
+      const courseKey = section.course_id;
+      const meta = courseDetails[courseKey];
+      console.log("🔎 courseKey:", courseKey);
+      console.log("📦 courseDetails[courseKey]:", meta);
+      console.log("💡 All courseDetails keys:", Object.keys(courseDetails));
+
     const hasSessions = section.schedule?.sessions?.length;
     const formattedSessions = hasSessions
       ? section.schedule!.sessions.map((session, idx) => {
@@ -270,26 +328,20 @@ const fetchCourseDetails = async (courseKey: string) => {
     const room = firstSessionWithLocation?.location?.room || "TBD";
 
     
-    const courseKey = `${section.subject_id}.${section.course_number}-${section.term.sis_term_code}`;
-    const courseMeta = courseMetadata[courseKey];
-const courseTitle = section.name || courseMeta?.title || 'Untitled';
-const courseDescription = courseDetails[courseKey]?.orc_description || courseMeta?.description || 'No description available.';
-const coursePrereqs = courseDetails[courseKey]?.prerequisites || courseMeta?.prerequisites || 'No prerequisites available.';
-
 
 
     return (
       <React.Fragment key={section.id}>
                   <button
             className='course-card'
-            onClick={() => {
+            onClick={async () => {
+              await fetchCourseDetails(courseKey);
               toggleCourse(section.id);
-              fetchCourseDetails(courseKey);
             }}
+            
           >
 
-          <h1 className='course-title'>{section.name} + {courseTitle}</h1>
-          <h1>description + {courseDescription} + {coursePrereqs}</h1>
+          <h1 className='course-title'>{section.name}</h1>
           {/* <h3>{section.course_id}</h3> */}
           <div className='credit-icon-column'>
             <h3 className='credit'>TLA</h3>
@@ -328,14 +380,31 @@ const coursePrereqs = courseDetails[courseKey]?.prerequisites || courseMeta?.pre
               <div className='infobox'><div className='infobox-title'>Time</div><div className='infobox-content'>{formattedSessions}</div></div>
               <div className='infobox'><div className='infobox-title'>Building</div><div className='infobox-content'>{building}</div></div>
               <div className='infobox'><div className='infobox-title'>Room</div><div className='infobox-content'>{room}</div></div>
+              <div className='infobox'><div className='infobox-title'>CourseId</div><div className='infobox-content'>{section.course_id}</div></div>
+
               <div className='infobox'><div className='infobox-title'>Pre Req</div><div className='infobox-content'>prereqs</div></div>
               <div className='infobox'><div className='infobox-title'>Credits</div><div className='infobox-content'>distribs</div></div>
-              <div className='infobox'><div className='infobox-title'>NRO</div><div className='infobox-content'>nroOptions</div></div>
-                {/* <div className='infobox'><div className='infobox-title'>CRN</div><div className='infobox-content'>{section.id}</div></div> */}
               </div>
-              <h2 style={{ color: '#66451C', fontFamily:'Inter', fontSize:'20px', marginTop:'-65px' }}>{section.name}</h2>
-              <p className="prereqs" style={{ marginTop: '0px', textDecoration:'underline', color:'#66451C', fontFamily:'Inter' }}>Prerequisites: prereqs</p>
-              <p className="coursedescription" style={{ marginTop:'125px', width: '700px', fontFamily:'Inter', color:'#66451C' }}> courseDescription</p>
+              
+              <p className="prereqs" style={{ marginTop: '0px', textDecoration:'underline', color:'#66451C', fontFamily:'Inter' }}>Prerequisites: </p>
+              {meta?.orc_description ? (
+              <p
+                className="coursedescription"
+                style={{
+                  marginTop: '125px',
+                  width: '700px',
+                  fontFamily: 'Inter',
+                  color: '#66451C'
+                }}
+                dangerouslySetInnerHTML={{ __html: meta.orc_description }}
+              />
+            ) : (
+              <p className="coursedescription" style={{ marginTop: '125px', color: '#66451C' }}>
+                No description available. Please check the department website for more information.
+              </p>
+            )}
+
+              
               <p className="crosslisted" style={{ marginTop:'30px', color:'#66451C', fontFamily:'Inter' }}>
                 Cross-listed Courses: {section.crosslist?.sections?.map(s => s.id).join(', ') || 'None'}
               </p>

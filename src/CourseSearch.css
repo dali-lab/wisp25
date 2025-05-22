@@ -216,6 +216,8 @@ label {
   box-sizing: border-box;
   cursor: pointer;
   position: relative;
+  border-bottom: none;
+  
 }
 
 .course-wrapper {
@@ -358,6 +360,7 @@ label {
 .Course-Info-Rectangle{
   background-color: #F3F2DE;
   padding: 20px;
+  padding-top: 0px;
   color: black;
   border-radius: 2px;
   border: 3.5px solid #66451C;
@@ -368,6 +371,9 @@ label {
   overflow-wrap: break-word;
   word-wrap: break-word;
   box-sizing: border-box;
+  border-top: none;
+  border-bottom: none;
+
 }
 .crosslisted{
   margin-top: 200px;
