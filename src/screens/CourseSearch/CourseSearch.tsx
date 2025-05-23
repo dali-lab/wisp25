@@ -52,6 +52,7 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
       // Validate if the response is an array before setting the state
       if (Array.isArray(response.data)) {
         setCourses(response.data);
+        
       } else {
         console.error("Invalid response format:", response.data);
       }
