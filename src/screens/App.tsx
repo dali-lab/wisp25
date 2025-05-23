@@ -14,7 +14,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <div>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <Link to="/">Landing Page</Link>
@@ -32,16 +32,16 @@ const App: React.FC = () => {
               <Link to="/coffeechat">Coffee Chat</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/courseSearch" element={<CourseSearch />} />
           <Route path="/savedCourses" element={<SavedCourses />} />
-          <Route path="/courseloadtester" element={<CourseLoadTester />} />
-          <Route path="coffeechat" element={<CoffeeChat />}>
-          <Route path="registercoffeechat" element={<RegisterCoffeeChat />} />
-          <Route path="explorecoffeechat" element={<ExploreCoffeeChat />} />
-          <Route path="registercoffeechattest" element={< RegisterPlaceholder/>} />
+          <Route path="/courseLoadTester" element={<CourseLoadTester />} />
+          <Route path="/coffeeChat" element={<CoffeeChat />}>
+          <Route path="/coffeeChat/register" element={<RegisterCoffeeChat />} />
+          <Route path="/coffeeChat/explore" element={<ExploreCoffeeChat />} />
+          {/* <Route path="/registerCoffeeChatTest" element={< RegisterPlaceholder/>} /> */}
           </Route>
           <Route path="/contact" element={<StudentContact />} />
         </Routes>

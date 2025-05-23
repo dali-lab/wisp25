@@ -5,6 +5,7 @@ import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded
 import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
 import PeopleOutlineRoundedIcon from "@mui/icons-material/PeopleOutlineRounded";
 import PersonIcon from "@mui/icons-material/Person";
+import { Link } from "react-router-dom";
 
 interface MenuBarProps {
   isOpen: boolean;
@@ -15,34 +16,34 @@ const MenuBar: React.FC<MenuBarProps> = ({ isOpen }) => {
     <div className={`menuBar ${isOpen ? "open" : "closed"}`}>
       <ul className="menuItems">
         <li className="menuItem">
-          <a href="#">
+          <Link to="/courseSearch">
             <SearchRoundedIcon sx={{ fontSize: 35 }} />
             <p>Search Courses</p>
-          </a>
+          </Link>
         </li>
         <li className="menuItem">
-          <a href="#">
+          <Link to="/courseLoadTester">
             <MenuBookRoundedIcon sx={{ fontSize: 35 }} />
             <p>Course Load Tester</p>
-          </a>
+          </Link>
         </li>
         <li className="menuItem">
-          <a href="#">
+          <Link to="/savedCourses">
             <BookmarkBorderRoundedIcon sx={{ fontSize: 35 }} />
             <p>Saved Courses</p>
-          </a>
+          </Link>
         </li>
         <li className="menuItem">
-          <a href="#">
+          <Link to="/coffeeChat">
             <PeopleOutlineRoundedIcon sx={{ fontSize: 35 }} />
             <p>Coffee Chat</p>
-          </a>
+          </Link>
         </li>
         <li className="menuItem">
-          <a href="#">
+          <Link to="/coffeeChat/register">
             <PersonIcon sx={{ fontSize: 35 }} />
             <p>Register for Coffee Chats</p>
-          </a>
+          </Link>
         </li>
       </ul>
     </div>

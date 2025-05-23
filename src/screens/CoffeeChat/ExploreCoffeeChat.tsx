@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/CoffeeChat.css';
+import './CoffeeChat.css';
 import { useNavigate } from 'react-router-dom';
 
 interface Student {
