@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import MenuBar from '../../components/MenuBar/MenuBar';
-import SearchRoundedIcon from '@mui/icons-material/SearchRounded';
-import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
-import PeopleOutlineRoundedIcon from '@mui/icons-material/PeopleOutlineRounded';
-import MenuBookRoundedIcon from '@mui/icons-material/MenuBookRounded';
-import '../../styles/LandingPage.css';
+import React, { useState } from "react";
+import MenuBar from "../../components/MenuBar/MenuBar";
+import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
+import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
+import PeopleOutlineRoundedIcon from "@mui/icons-material/PeopleOutlineRounded";
+import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
+import { Link } from "react-router-dom";
+import './LandingPage.css'
 
 const LandingPage: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -23,9 +24,9 @@ const LandingPage: React.FC = () => {
         </div>
         <h1 className="title">Big Green Planner</h1>
         <div className="savedCourses">
-          <a href="#">
+          <Link to="/savedCourses">
             <BookmarkBorderRoundedIcon fontSize="large" />
-          </a>
+          </Link>
         </div>
       </nav>
       {/* Pass the isOpen prop here */}
@@ -50,22 +51,22 @@ const LandingPage: React.FC = () => {
         </div>
         <div className="highlights">
           <div className="highlight">
-            <a href="#">
+            <Link to="/courseSearch">
               <MenuBookRoundedIcon sx={{ fontSize: 90 }} />
-              <h3>Subjects</h3>
-            </a>
+              <h3>Courses</h3>
+            </Link>
           </div>
           <div className="highlight">
-            <a href="#">
+            <Link to="/coffeeChat">
               <PeopleOutlineRoundedIcon sx={{ fontSize: 90 }} />
               <h3>Coffee Chats</h3>
-            </a>
+            </Link>
           </div>
           <div className="highlight">
-            <a href="#">
+            <Link to="/courseLoadTester">
               <StarRoundedIcon sx={{ fontSize: 90 }} />
-              <h3>Reviews</h3>
-            </a>
+              <h3>Course Load Tester</h3>
+            </Link>
           </div>
         </div>
       </div>

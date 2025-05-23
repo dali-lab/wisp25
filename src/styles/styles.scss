@@ -1,18 +1,35 @@
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+
+
 * {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 }
 
-body, html {
+.itim-regular {
+  font-family: "Itim", cursive;
+  font-weight: 200;
+  font-style: normal;
+}
+
+body,
+html {
   min-height: 100vh;
   margin: 0;
   overflow: auto;
   background-color: #e2e8f0;
+  width: 100vw;
 }
 
-.container {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+.body {
+  font-family: Helvetica, Sans-Serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Itim";
+}
+
+p {
+  font-family: Arial, Helvetica, sans-serif;
 }
