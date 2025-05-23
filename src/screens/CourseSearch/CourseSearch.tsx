@@ -6,7 +6,11 @@ import dropDownIcon from '../../assets/drop_.svg';
 import axios from 'axios';
 import dotenv from "dotenv";
 
+<<<<<<< HEAD
 require("dotenv").config();
+=======
+dotenv.config();
+>>>>>>> 318feca (cleaned filed structure)
 
 interface Course {
   id: string;
