@@ -1,6 +1,11 @@
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useState } from 'react';
-import './CourseLoadTester.css';
+import '../screens/CourseLoadTester.css';
+
+type Course = {
+  id: string;
+  name: string;
+}
 
 const initialCourses = [
   { id: 'course-1', name: 'Course 1' },
@@ -10,23 +15,42 @@ const initialCourses = [
 ];
 
 const CourseLoadTester = () => {
-  const [savedCourses, setSavedCourses] = useState(initialCourses);
-  const [courseLoad, setCourseLoad] = useState([]);
+  const [savedCourses, setSavedCourses] = useState<Course[]>(initialCourses);
+  const [courseLoad, setCourseLoad] = useState<Course[]>([]);
 
-  const onDragEnd = (result: any) => {
+  const onDragEnd = (result: DropResult) => {
     const { source, destination } = result;
     if (!destination) return;
-
-    // Drag between columns
-    if (source.droppableId !== destination.droppableId) {
-      const sourceList = source.droppableId === 'saved' ? savedCourses : courseLoad;
-      const destList = destination.droppableId === 'saved' ? savedCourses : courseLoad;
-
-      const [movedItem] = sourceList.splice(source.index, 1);
-      destList.splice(destination.index, 0, movedItem);
-
-      setSavedCourses([...savedCourses]);
-      setCourseLoad([...courseLoad]);
+  
+    if (source.droppableId === destination.droppableId) {
+      const items = Array.from(
+        source.droppableId === 'saved' ? savedCourses : courseLoad
+      );
+      const [movedItem] = items.splice(source.index, 1);
+      items.splice(destination.index, 0, movedItem);
+  
+      if (source.droppableId === 'saved') {
+        setSavedCourses(items);
+      } else {
+        setCourseLoad(items);
+      }
+    } else {
+      const sourceItems = Array.from(
+        source.droppableId === 'saved' ? savedCourses : courseLoad
+      );
+      const destItems = Array.from(
+        destination.droppableId === 'saved' ? savedCourses : courseLoad
+      );
+      const [movedItem] = sourceItems.splice(source.index, 1);
+      destItems.splice(destination.index, 0, movedItem);
+  
+      if (source.droppableId === 'saved') {
+        setSavedCourses(sourceItems);
+        setCourseLoad(destItems);
+      } else {
+        setSavedCourses(destItems);
+        setCourseLoad(sourceItems);
+      }
     }
   };
 
@@ -68,7 +92,12 @@ const CourseLoadTester = () => {
                 {savedCourses.map((course, index) => (
                   <Draggable draggableId={course.id} index={index} key={course.id}>
                     {(provided) => (
-                      <div className="card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                      <div
+                        className="card" 
+                        ref={provided.innerRef} 
+                        {...provided.draggableProps} 
+                        {...provided.dragHandleProps}
+                        style={{...provided.draggableProps.style}}>
                         <div className="card-title">{course.name}</div>
                         <div className="book">📖</div>
                       </div>
@@ -87,7 +116,12 @@ const CourseLoadTester = () => {
                 {courseLoad.map((course, index) => (
                   <Draggable draggableId={course.id} index={index} key={course.id}>
                     {(provided) => (
-                      <div className="card" ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+                      <div
+                        className="card"
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={{...provided.draggableProps.style}}>
                         <div className="card-title">{course.name}</div>
                         <div className="book">📖</div>
                       </div>
@@ -103,6 +137,6 @@ const CourseLoadTester = () => {
       </DragDropContext>
     </div>
   );
-}
+};
 
 export default CourseLoadTester;
