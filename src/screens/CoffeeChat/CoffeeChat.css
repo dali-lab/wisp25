@@ -1,16 +1,36 @@
+ @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica, 'Itim';
+}
+
+body {
+    background-color: #EDECE4 !important;
+    color: #000000;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+}
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
 }
+
 h1 {
     margin: 40px;
     font-family: 'Itim';
-    font-size: 60px;
+    font-size: 50px;
     font-weight: 600;
-    color: #66451C;
+    color: #2b4928;
 }
 
 .search-container {
@@ -22,7 +42,7 @@ h1 {
     width: 100%;
     border: 3px solid #8b4513;
     border-radius: 20px;
-    margin: 30px 20px;
+    margin: 0 20px 30px 20px;
     padding: 5px;
 }
 
@@ -89,7 +109,7 @@ h1 {
 .student-topbar {
     background-color: #3B6838;
     color: #fff;
-    padding: 20px;
+    padding: 15px;
     width: 100%;
     flex-shrink: 0;
     display: flex;
