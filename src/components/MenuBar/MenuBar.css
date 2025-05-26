@@ -14,7 +14,7 @@
   left: -250px;
   width: fit-content;
   background-color: #3b6838;
-  padding: 20px;
+  padding: 1rem;
   color: white;
   z-index: 1000;
   transition: left 0.3s ease;
@@ -55,7 +55,7 @@
 }
 
 .menuItem a > * {
-  padding: 5px;
+  padding: .1rem;
   font-size: 1.5rem;
   font-family: "Itim";
   color: white;
