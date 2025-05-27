@@ -11,11 +11,6 @@ const SavedCourses: React.FC = () => {
   const [selectedCourse, setSelectedCourse] = useState<Course | any>(null);
   const [savedCourses, setSavedCourses] = useState<Course[]>(getSavedCourses());
 
-
-//   const handleRemoveCourse = (courseId: string) => {
-//     removeCourse(courseId);
-//     setSavedCourses(getSavedCourses());
-// };
   return (
     <div className="background-color">
       <Header viewMode={viewMode} setViewMode={setViewMode} />
@@ -25,12 +20,6 @@ const SavedCourses: React.FC = () => {
         courses={savedCourses}
         onSelectCourse={(course) => setSelectedCourse(course)}
       />
-        {/* {savedCourses.map(course => (
-          <button
-                key={course.id}
-                >{course.name}
-                </button>
-                ))} */}
             </div>
             {selectedCourse && (
                 <CourseDetailModal

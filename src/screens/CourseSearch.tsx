@@ -6,9 +6,17 @@ import dropDownIcon from '../assets/drop_.svg';
 import axios from 'axios';
 import { saveCourse, isCourseSaved } from '@/utils/courseStorage';
 
-interface Course {
+export interface Course {
   id: string;
   name: string;
+  description: string;
+  instructor: string;
+  prereqs: string;
+  crossListed: string;
+  time: string;
+  credits: string;
+  nro?: string;
+  crn: string;
   subject_id: string;
 }
 
@@ -43,7 +51,7 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
   useEffect(() => {
     axios.get('/api/academic/courses', {
       headers: {
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OTY0IiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJHYWVsbGUgRS4gVmFsbWlyIiwiZXhwIjoxNzQ2NzU0NjA3LCJpYXQiOjE3NDY3NDM4MDcsImVtYWlsIjoiR2FlbGxlLkUuVmFsbWlyLjI4QGRhcnRtb3V0aC5lZHUifQ.ij2jML0CCcnnApWXeCch72ztLvWYL2amTGYjnAVKusOsVVOKtLK1jlHukxgkF7BoFcVXk9mM-Yywp1uPFTEjAxMHy3ckLADsEqoWuH0hVi4WJLLDWKJ7IBLjwl1AabgwsT3g1rMYA92dL0arPCjSVAtZkPnq5XDX4xTfj_EmQsyTGbg7ZI5q1-2Cc0jEdVeKSqYakIcvXKZETeOKFbd1k94Oa1_ZjiNaYWpgAqqAStyMwvbhwfGh5gvleua5ZhAwIXvDDl7DhdzgclSmDi04MrqNmD-jtQxiFNIFtdAiB0S7oXyFmT1je4VQ2X6pOlGoxuwH3fTdVrvNLTYxJcCedQ`
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OTY0IiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJHYWVsbGUgRS4gVmFsbWlyIiwiZXhwIjoxNzQ4MjExNTkzLCJpYXQiOjE3NDgyMDA3OTMsImVtYWlsIjoiR2FlbGxlLkUuVmFsbWlyLjI4QGRhcnRtb3V0aC5lZHUifQ.DkZd7AJMh2kvRCuZw3mT4EllT6PwVTrKvwzztb5-zQjpPa94FZO9cRNGpoxQxJvcrNLswF4w2ES5V9RQpaso0qquMk3HwCdvJ67z68vSGa94hXpKx7LLjiKHmvUK98qwkRAlg1-uQtTEyHMYJzFAxMY3cw6VGhlUXnA03OG8opcVfHCu81zP4eaG2UFOI93azLVbJWg18q1ak_jrOzD2eIZS4877vX9u4_klBpDLkbCE00nGYUP_mswyt6992QSBUrTs4YsuAHZ-kXJ-5cfbzZT0Vd30srFn0SXf8nXFmEMq0xgVCLqsb0Aas6BfspzIDs7riHslMxmItg9HBDRo6w`
       }
     })
     .then((response) => {
@@ -62,7 +70,7 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
   useEffect(() => {
     const filtered = courses.filter((course) => {
       const isSubjectMatch = selectedSubjects.length === 0 || selectedSubjects.includes(course.subject_id);
-      const isNameMatch = course.name.toLowerCase().includes(searchQuery.toLowerCase());
+      const isNameMatch = course.id.toLowerCase().includes(searchQuery.toLowerCase());
       return isNameMatch && isSubjectMatch;
     });
     setFilteredCourses(filtered);
