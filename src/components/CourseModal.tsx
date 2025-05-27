@@ -7,15 +7,18 @@ import {
 import "./CourseModal.css";
 import SaveIcon from '../assets/save-icon.svg';
 import CloseIcon from '../assets/close-icon.svg';
+import  {Course}  from "../screens/CourseSearch";
 
 type CourseDetailModalProps = {
-  course: any;
+  course: Course;
   onClose: () => void;
+  onUnsave: (courseId: string) => void;
 };
 
 const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
   course,
   onClose,
+  onUnsave,
 }) => {
   const [isSaved, setIsSaved] = useState(false);
 
@@ -26,7 +29,8 @@ const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
   const handleToggleSave = () => {
     if (isSaved) {
       removeCourse(course.id);
-    } else {
+      onUnsave(course.id);
+    } else{
       saveCourse(course);
     }
     setIsSaved(!isSaved);
@@ -36,7 +40,7 @@ const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="Course-Header-Rectangle">
-          {course.title}
+          {course.name}
           <img
             src={CloseIcon}
             alt=""
@@ -45,7 +49,6 @@ const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
           />
         </div>
         <div className="Course-Info-Rectangle">
-          <div className="prereqs">Prerequisite: {course.prereqs}</div>
           <div className="courseinfoboxes">
             <div>
               <div className="infobox-title">Instructor</div>
@@ -78,7 +81,7 @@ const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
             src={SaveIcon}
             onClick={handleToggleSave}
             className="save-btn"
-          ></img>
+          />
         </div>
       </div>
     </div>
