@@ -1,8 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '../CourseSearch.css';
-import checkIcon from '../assets/check_icon.svg';
-import menuIcon from '../assets/menu_icon.svg';
-import dropDownIcon from '../assets/drop_.svg';
+import './CourseSearch.css';
+import checkIcon from '../../assets/check_icon.svg';
+import menuIcon from '../../assets/menu_icon.svg';
+import dropDownIcon from '../../assets/drop_.svg';
+
+
+// import checkIcon from '../assets/check_icon.svg';
+// import menuIcon from 'assets/menu_icon.svg';
+// import dropDownIcon from 'assets/drop_.svg';
 import axios from 'axios';
 
 const formatTime = (time: string | null | undefined) => {
