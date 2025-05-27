@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../CourseSearch.css';
 import checkIcon from '../assets/check_icon.svg';
 import menuIcon from '../assets/menu_icon.svg';
@@ -91,18 +91,21 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
   const [openCourses, setOpenCourses] = useState<Record<string, boolean>>({});
 
   const [courseDetails, setCourseDetails] = useState<Record<string, any>>({});
+  
   const [courseMetadata, setCourseMetadata] = useState<Record<string, any>>({});
+  const [instructorNames, setInstructorNames] = useState<Record<string, string>>({});   
+
 
 
 const fetchCourseDetails = async (courseKey: string) => {
-  console.log("⏳ Fetching course details for:", courseKey);
+  // console.log("⏳ Fetching course details for:", courseKey);
 
   if (courseDetails[courseKey]) return;
 
   try {
     const response = await axios.get(`/api/academic/courses/${courseKey}`, {
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0Nzk2NzMzNSwiaWF0IjoxNzQ3OTU2NTM1LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.GOnfFd--KHty7xZMQRBxFMx2cnn3RuOMOeOe4c3HgpATPbOm6Rvp-3HotF_prLnxYongLp7wO1Z8IfmdXaGW1UZdPGULMLSlBov_Qh5UjvLO1KHe4d2vhN9DRessqQJ_SyY6dkGhn35MYdnb1maaLzJ-BAY9lZP98b484yndKOslB-BPbXZdfHwaVSv7VDquH_gSptcjZoQSUOXBRJwSu27DOx2_IXs57JMS1r_dATiHWDHszYIUGOZOttwfO5KUSZprDnpWey-mJ4pGQ2PkOCLYNhmuhzUxEybjYHh-jkxViCAB_VWtDUAtLQamPEZrWqvpyYciFFcJP2X6cVxptQ` // replace this
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0ODM2MDkyNiwiaWF0IjoxNzQ4MzUwMTI2LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.ipOgLYXlSSv7xtyrXwR2kuWcXx31eZF2YXt1TsASJeOqwIT77wcNNX3QafFQcnBU85EBzJ-B0xkQPKAFwF76ueLtK2gIakB_3u31Bcd4ziPUSsxQp3415IAOIthkK8YQMSkzsiS74DvIL_l2J0FhrNggd6-1fiKt_ejFVHGd_-av5-37p_2lZSRVubUz8-T5CYG6ATJCyjxUdklD3XKcIIatY8e7tg1qhsgTTdeohrn0LVvej1c_cTiOepNZJl4C0SA_Jy2RxwKaFM91Gm8WmOL1i_BH3FkuKRrEsVkxS5w4zStrh0sGvIO6L7B3bzC0ByKYOjpn5q_GZVzLqBKEkw` // replace this
       }
     });
 
@@ -114,6 +117,39 @@ const fetchCourseDetails = async (courseKey: string) => {
     console.error("Failed to fetch course details:", err);
   }
 };
+
+  const fetchInstructorName = async (netid: string) => {
+  if (!netid || instructorNames[netid]) return;
+
+  try {
+    const response = await axios.get(`/api/people_names?netid=${netid}`, {
+      headers: {
+        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0ODMzMjMzOSwiaWF0IjoxNzQ4MzIxNTM5LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.LdGiyXDLFmqdn3TT9kQ12NMi9uzAI95ztGuaGekn_Eg5o76h5B2vGzIVINEeA16gecAWC9aiGTbwBWnt1nd8lyzq3TQDnJcmSqC4pvdYT_er3S-4lexbdQzxCYUdBp81jwo4PXcOEo9RGgPwgT4rZa5_GXA4pT9xp-Trf6qNdijhu_CbUli4HeieRgdkLOsHUNz3jRunuM8fKDLxnX_iZbzr24TlqNzgPf42-JOARn649pTuMoG91XmTOpEYtZxurC6vxx4ObS1WrqYL4YkCKK4m2IoKlgTRSQDvyNSEQW4vqh8HBAWOP7wOL1s66drvwr3am3moNbIwd4wzxdp2iA`
+      }
+    });
+
+    const entries = response.data;
+
+    // Prefer active legal name, then any legal name, then first entry
+    const preferred = entries.find((e: any) => e.is_active && e.name_type === 'Legal Name')
+      || entries.find((e: any) => e.name_type === 'Legal Name')
+      || entries[0];
+
+    const name = preferred
+      ? `${preferred.first_name} ${preferred.last_name}`
+      : netid;
+
+    setInstructorNames(prev => ({ ...prev, [netid]: name }));
+    console.log("👤 People API data for", netid, "=>", response.data);
+
+    console.log("✅ Instructor name fetched:", name);
+  } catch (err) {
+    console.error(`❌ Failed to fetch name for ${netid}:`, err);
+    setInstructorNames(prev => ({ ...prev, [netid]: netid }));
+  }
+};
+
+
 
 
   useEffect(() => {
@@ -127,7 +163,7 @@ const fetchCourseDetails = async (courseKey: string) => {
         while (hasMore) {
           const response = await axios.get('/api/academic/sections', {
             headers: {
-              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0Nzk2NzMzNSwiaWF0IjoxNzQ3OTU2NTM1LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.GOnfFd--KHty7xZMQRBxFMx2cnn3RuOMOeOe4c3HgpATPbOm6Rvp-3HotF_prLnxYongLp7wO1Z8IfmdXaGW1UZdPGULMLSlBov_Qh5UjvLO1KHe4d2vhN9DRessqQJ_SyY6dkGhn35MYdnb1maaLzJ-BAY9lZP98b484yndKOslB-BPbXZdfHwaVSv7VDquH_gSptcjZoQSUOXBRJwSu27DOx2_IXs57JMS1r_dATiHWDHszYIUGOZOttwfO5KUSZprDnpWey-mJ4pGQ2PkOCLYNhmuhzUxEybjYHh-jkxViCAB_VWtDUAtLQamPEZrWqvpyYciFFcJP2X6cVxptQ`
+              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0ODM2MDkyNiwiaWF0IjoxNzQ4MzUwMTI2LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.ipOgLYXlSSv7xtyrXwR2kuWcXx31eZF2YXt1TsASJeOqwIT77wcNNX3QafFQcnBU85EBzJ-B0xkQPKAFwF76ueLtK2gIakB_3u31Bcd4ziPUSsxQp3415IAOIthkK8YQMSkzsiS74DvIL_l2J0FhrNggd6-1fiKt_ejFVHGd_-av5-37p_2lZSRVubUz8-T5CYG6ATJCyjxUdklD3XKcIIatY8e7tg1qhsgTTdeohrn0LVvej1c_cTiOepNZJl4C0SA_Jy2RxwKaFM91Gm8WmOL1i_BH3FkuKRrEsVkxS5w4zStrh0sGvIO6L7B3bzC0ByKYOjpn5q_GZVzLqBKEkw`
             },
             params: {
               'term.sis_term_code': termCode,
@@ -157,9 +193,7 @@ const fetchCourseDetails = async (courseKey: string) => {
 
     fetchSections();
   }, []);
-  useEffect(() => {
-    fetchCourseDetails("AAAS.023-201503");
-  }, []);
+  
   
 
 
@@ -198,7 +232,7 @@ const fetchCourseDetails = async (courseKey: string) => {
         while (hasMore) {
           const response = await axios.get('/api/academic/courses', {
             headers: {
-              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0Nzk2NzMzNSwiaWF0IjoxNzQ3OTU2NTM1LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.GOnfFd--KHty7xZMQRBxFMx2cnn3RuOMOeOe4c3HgpATPbOm6Rvp-3HotF_prLnxYongLp7wO1Z8IfmdXaGW1UZdPGULMLSlBov_Qh5UjvLO1KHe4d2vhN9DRessqQJ_SyY6dkGhn35MYdnb1maaLzJ-BAY9lZP98b484yndKOslB-BPbXZdfHwaVSv7VDquH_gSptcjZoQSUOXBRJwSu27DOx2_IXs57JMS1r_dATiHWDHszYIUGOZOttwfO5KUSZprDnpWey-mJ4pGQ2PkOCLYNhmuhzUxEybjYHh-jkxViCAB_VWtDUAtLQamPEZrWqvpyYciFFcJP2X6cVxptQ`
+              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0ODM2MDkyNiwiaWF0IjoxNzQ4MzUwMTI2LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.ipOgLYXlSSv7xtyrXwR2kuWcXx31eZF2YXt1TsASJeOqwIT77wcNNX3QafFQcnBU85EBzJ-B0xkQPKAFwF76ueLtK2gIakB_3u31Bcd4ziPUSsxQp3415IAOIthkK8YQMSkzsiS74DvIL_l2J0FhrNggd6-1fiKt_ejFVHGd_-av5-37p_2lZSRVubUz8-T5CYG6ATJCyjxUdklD3XKcIIatY8e7tg1qhsgTTdeohrn0LVvej1c_cTiOepNZJl4C0SA_Jy2RxwKaFM91Gm8WmOL1i_BH3FkuKRrEsVkxS5w4zStrh0sGvIO6L7B3bzC0ByKYOjpn5q_GZVzLqBKEkw`
             },
             params: {
               is_active: true,
@@ -248,6 +282,33 @@ const fetchCourseDetails = async (courseKey: string) => {
 
     setFilteredSections(filtered);
   }, [searchQuery, sections, selectedSubjects]);
+
+  
+  useEffect(() => {
+  const netidsToFetch = new Set<string>();
+
+  filteredSections.forEach(section => {
+    const netid = section.instructors?.find(i => i.is_primary)?.netid;
+    if (netid && !instructorNames[netid]) {
+      netidsToFetch.add(netid);
+    }
+  });
+
+  netidsToFetch.forEach(fetchInstructorName);
+}, [filteredSections, instructorNames]);
+
+useEffect(() => {
+  const keysToFetch = new Set<string>();
+
+  filteredSections.forEach(section => {
+    const key = section.course_id;
+    if (!courseDetails[key]) {
+      keysToFetch.add(key);
+    }
+  });
+
+  keysToFetch.forEach(fetchCourseDetails);
+}, [filteredSections]);
 
   const toggleSubject = (subject: string) => {
     setOpenSubjects(prev => ({
@@ -301,14 +362,22 @@ const fetchCourseDetails = async (courseKey: string) => {
             <div className="course-list">
               {filteredSections
   .filter(section => section.subject_id === subject)
+  .sort((a, b) => parseInt(a.course_number) - parseInt(b.course_number))
   .map(section => {
+
       // ⬇️ ADD THIS HERE:
 
       const courseKey = section.course_id;
       const meta = courseDetails[courseKey];
-      console.log("🔎 courseKey:", courseKey);
-      console.log("📦 courseDetails[courseKey]:", meta);
-      console.log("💡 All courseDetails keys:", Object.keys(courseDetails));
+      const primaryInstructorNetid = section.instructors?.find(i => i.is_primary)?.netid ?? 'TBD';
+
+
+
+//       console.log("🔍 meta.distributives for", courseKey, ":", meta?.distributives);
+// console.log("🧪 typeof meta.distributives:", typeof meta?.distributives);
+//       console.log("🔎 courseKey:", courseKey);
+//       console.log("📦 courseDetails[courseKey]:", meta);
+//       console.log("💡 All courseDetails keys:", Object.keys(courseDetails));
 
     const hasSessions = section.schedule?.sessions?.length;
     const formattedSessions = hasSessions
@@ -344,7 +413,7 @@ const fetchCourseDetails = async (courseKey: string) => {
           <h1 className='course-title'>{section.name}</h1>
           {/* <h3>{section.course_id}</h3> */}
           <div className='credit-icon-column'>
-            <h3 className='credit'>TLA</h3>
+            <h3 className='credit'>{section.course_number}</h3>
             <img
               src={dropDownIcon}
               alt="Dropdown"
@@ -354,10 +423,11 @@ const fetchCourseDetails = async (courseKey: string) => {
         </button>
 
         {openCourses[section.id] && (
+          
           <div className="Course-Info">
             <div className="Course-Info-Rectangle">
               <div className='courseinfoboxes'>
-                <div className='infobox'><div className='infobox-title'>Instructor</div><div className='infobox-content'>Instructor</div></div>
+                {/* <div className='infobox'><div className='infobox-title'>Instructor</div><div className='infobox-content'>Instructor</div></div> */}
                 {/* <div className='infobox'>
                 <div className='infobox-title'>Time</div>
                 <div className='infobox-content'>
@@ -380,18 +450,45 @@ const fetchCourseDetails = async (courseKey: string) => {
               <div className='infobox'><div className='infobox-title'>Time</div><div className='infobox-content'>{formattedSessions}</div></div>
               <div className='infobox'><div className='infobox-title'>Building</div><div className='infobox-content'>{building}</div></div>
               <div className='infobox'><div className='infobox-title'>Room</div><div className='infobox-content'>{room}</div></div>
-              <div className='infobox'><div className='infobox-title'>CourseId</div><div className='infobox-content'>{section.course_id}</div></div>
-
-              <div className='infobox'><div className='infobox-title'>Pre Req</div><div className='infobox-content'>prereqs</div></div>
-              <div className='infobox'><div className='infobox-title'>Credits</div><div className='infobox-content'>distribs</div></div>
+              <div className='infobox'>
+              <div className='infobox-title'>Dist</div>
+                <div className='infobox-content'>
+                  {meta?.distributives?.length
+                    ? meta.distributives.map((d: any) => d.id).join(', ')
+                    : 'None'}
+                </div>
               </div>
               
-              <p className="prereqs" style={{ marginTop: '0px', textDecoration:'underline', color:'#66451C', fontFamily:'Inter' }}>Prerequisites: </p>
+
+              <div className='infobox'>
+                <div className='infobox-title'>WC</div>
+                <div className='infobox-content'>
+                  {meta?.culture_options?.length
+                    ? meta.culture_options.map((c: any) => c.id).join(', ')
+                    : 'None'}
+                </div>
+              </div>
+              <div className='infobox'>
+  <div className='infobox-title'>Instructor</div>
+  <div className='infobox-content'>
+    {instructorNames[primaryInstructorNetid] || primaryInstructorNetid}
+  </div>
+</div>
+
+
+
+              
+              {/* <div className='infobox'><div className='infobox-title'>CourseId</div><div className='infobox-content'>{section.course_id}</div></div> */}
+
+              <div className='infobox'><div className='infobox-title'>Pre Req</div><div className='infobox-content'>{meta?.prerequisites ?? 'None'}</div></div>
+              
+              </div>
+              
+              <p className="prereqs" style={{ marginTop: '0px', textDecoration:'underline', color:'#66451C', fontFamily:'Inter' }}>Prerequisites: {meta.Prerequisites}</p>
               {meta?.orc_description ? (
               <p
                 className="coursedescription"
                 style={{
-                  marginTop: '125px',
                   width: '700px',
                   fontFamily: 'Inter',
                   color: '#66451C'
@@ -399,15 +496,18 @@ const fetchCourseDetails = async (courseKey: string) => {
                 dangerouslySetInnerHTML={{ __html: meta.orc_description }}
               />
             ) : (
-              <p className="coursedescription" style={{ marginTop: '125px', color: '#66451C' }}>
+              <p className="coursedescription" style={{color: '#66451C' }}>
                 No description available. Please check the department website for more information.
               </p>
             )}
 
+              <div>
+                <p className="crosslisted" style={{ marginTop:'10px', color:'#66451C', fontFamily:'Inter' }}>
+                  Cross-listed Courses: {section.crosslist?.sections?.map(s => s.id).join(', ') || 'None'}
+                </p>
+                <p>hello</p>
+              </div>
               
-              <p className="crosslisted" style={{ marginTop:'30px', color:'#66451C', fontFamily:'Inter' }}>
-                Cross-listed Courses: {section.crosslist?.sections?.map(s => s.id).join(', ') || 'None'}
-              </p>
             </div>
           </div>
         )}
