@@ -4,9 +4,12 @@ import checkIcon from '../assets/check_icon.svg';
 import menuIcon from '../assets/menu_icon.svg';
 import dropDownIcon from '../assets/drop_.svg';
 import axios from 'axios';
-import { saveCourse, isCourseSaved } from '@/utils/courseStorage';
+import dotenv from "dotenv";
 
-export interface Course {
+
+dotenv.config();
+
+interface Course {
   id: string;
   name: string;
   description: string;
@@ -51,7 +54,7 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
   useEffect(() => {
     axios.get('/api/academic/courses', {
       headers: {
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OTY0IiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJHYWVsbGUgRS4gVmFsbWlyIiwiZXhwIjoxNzQ4MjExNTkzLCJpYXQiOjE3NDgyMDA3OTMsImVtYWlsIjoiR2FlbGxlLkUuVmFsbWlyLjI4QGRhcnRtb3V0aC5lZHUifQ.DkZd7AJMh2kvRCuZw3mT4EllT6PwVTrKvwzztb5-zQjpPa94FZO9cRNGpoxQxJvcrNLswF4w2ES5V9RQpaso0qquMk3HwCdvJ67z68vSGa94hXpKx7LLjiKHmvUK98qwkRAlg1-uQtTEyHMYJzFAxMY3cw6VGhlUXnA03OG8opcVfHCu81zP4eaG2UFOI93azLVbJWg18q1ak_jrOzD2eIZS4877vX9u4_klBpDLkbCE00nGYUP_mswyt6992QSBUrTs4YsuAHZ-kXJ-5cfbzZT0Vd30srFn0SXf8nXFmEMq0xgVCLqsb0Aas6BfspzIDs7riHslMxmItg9HBDRo6w`
+        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0NDczMjMyMiwiaWF0IjoxNzQ0NzIxNTIyLCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.GfAb36-RezqYvcMhlRE-WUFSmH78tnh92evKtlfsuPyfelYBSlo2E1mjEf1XIqE5wGuvTiM9uw0aoLI1JAPmvKGHgTiAfarsBKo7GKMv6GJ152RZRhhBUuFNWFe_ECwrog8lWxX0hicWLHLglrnH5RcxtGnDqq4lqSlM0iyHkG4QYeWDIhetvLGVrfH6AwbPOqdTuMoulABKU4Npmos94DSVH2s525IaOxi9f-GsfsdFvlRC1VDeI0wKNeNG06Sk_W0KUPpOAkDOOIHrSh5sMcXs3vbpgxIfYsVE96vvwG_RAqyZI47GgLt15Ul_m_SakbQvaY5Ngt4juIfgSeFXVw`
       }
     })
     .then((response) => {
@@ -70,7 +73,7 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
   useEffect(() => {
     const filtered = courses.filter((course) => {
       const isSubjectMatch = selectedSubjects.length === 0 || selectedSubjects.includes(course.subject_id);
-      const isNameMatch = course.id.toLowerCase().includes(searchQuery.toLowerCase());
+      const isNameMatch = course.name.toLowerCase().includes(searchQuery.toLowerCase());
       return isNameMatch && isSubjectMatch;
     });
     setFilteredCourses(filtered);
@@ -81,11 +84,6 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
       ...prev,
       [subject]: !prev[subject]
     }));
-  };
-
-  const handleSaveCourse = (course: Course) => {
-    saveCourse(course);
-    alert(`${course.name} saved!`);
   };
 
   const removeSubject = (subjectToRemove: string) => {
@@ -138,12 +136,6 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
                       <h3 className='credit'>TLA</h3>
                       <img src={dropDownIcon} alt="Dropdown" className='drop-down' />
                     </div>
-                    <button
-                        disabled={isCourseSaved(course.id)}
-                        onClick={() => handleSaveCourse(course)}
-                    >
-                        {isCourseSaved(course.id) ? 'Saved' : 'Save'}
-                    </button>
                   </button>
               ))}
             </div>
@@ -152,7 +144,7 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
       ))}
     </div>
   );
-  };
+};
 
 const App: React.FC = () => {
   const [query, setQuery] = useState('');

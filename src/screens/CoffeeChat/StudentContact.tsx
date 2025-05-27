@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../components/contactCard.css';
+import './contactCard.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const ContactCard: React.FC = ({ }) => {
