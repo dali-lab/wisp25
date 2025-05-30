@@ -5,8 +5,8 @@ body {
 }
 
 .subject-box {
-  width: 80%;
-  max-width: 80%;
+  width: 80vw;
+  max-width: none;
   margin: 20px auto;
   padding: 40px;
   border: 3.5px solid #66451C;
@@ -35,7 +35,7 @@ body {
   flex-wrap: wrap;
 }
 
-.column {
+.course-column {
   flex: 1;
   min-width: 250px;
   display: flex;
@@ -360,6 +360,7 @@ label {
 .Course-Info-Rectangle{
   background-color: #F3F2DE;
   padding: 20px;
+  padding-right: 18px;
   padding-top: 0px;
   color: black;
   border-radius: 2px;
@@ -437,4 +438,49 @@ label {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+.crosslisted-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bookmark-icon {
+  width: 24px;
+  height: 35  px;
+  cursor: pointer;
+
+
+}
+
+.bookmark-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.bookmark-icon:active {
+  transform: scale(0.95);
+  
+}
+
+.bookmark-icon {
+  opacity: 1;
+}
+
+.bookmark-icon.fade {
+  opacity: 0.5;
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+
+}
+
+.coursedescription {
+  width: '90%';
+  font-family: helvetica;  
+  color: '#66451C';
+  font-size: 16px;
+  color: #66451C;
+  margin-top: 10px;
+  line-height: 1.5;
 }

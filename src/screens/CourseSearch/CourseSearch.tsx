@@ -3,12 +3,16 @@ import './CourseSearch.css';
 import checkIcon from '../../assets/check_icon.svg';
 import menuIcon from '../../assets/menu_icon.svg';
 import dropDownIcon from '../../assets/drop_.svg';
+import unbookmarkIcon from '../../assets/unbookmarked.svg';
+import bookmarkIcon from '../../assets/bookmarked.svg';
+
 
 
 // import checkIcon from '../assets/check_icon.svg';
 // import menuIcon from 'assets/menu_icon.svg';
 // import dropDownIcon from 'assets/drop_.svg';
 import axios from 'axios';
+
 
 const formatTime = (time: string | null | undefined) => {
   if (!time || typeof time !== 'string' || !time.includes(':')) {
@@ -98,7 +102,16 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
   const [courseDetails, setCourseDetails] = useState<Record<string, any>>({});
   
   const [courseMetadata, setCourseMetadata] = useState<Record<string, any>>({});
-  const [instructorNames, setInstructorNames] = useState<Record<string, string>>({});   
+  const [instructorNames, setInstructorNames] = useState<Record<string, string>>({});  
+  const [bookmarkedCourses, setBookmarkedCourses] = useState<Record<string, boolean>>({});
+  
+  const toggleBookmark = (courseId: string) => {
+  setBookmarkedCourses(prev => ({
+    ...prev,
+    [courseId]: !prev[courseId]
+  }));
+};
+
 
 
 
@@ -110,7 +123,8 @@ const fetchCourseDetails = async (courseKey: string) => {
   try {
     const response = await axios.get(`/api/academic/courses/${courseKey}`, {
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0ODM2MDkyNiwiaWF0IjoxNzQ4MzUwMTI2LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.ipOgLYXlSSv7xtyrXwR2kuWcXx31eZF2YXt1TsASJeOqwIT77wcNNX3QafFQcnBU85EBzJ-B0xkQPKAFwF76ueLtK2gIakB_3u31Bcd4ziPUSsxQp3415IAOIthkK8YQMSkzsiS74DvIL_l2J0FhrNggd6-1fiKt_ejFVHGd_-av5-37p_2lZSRVubUz8-T5CYG6ATJCyjxUdklD3XKcIIatY8e7tg1qhsgTTdeohrn0LVvej1c_cTiOepNZJl4C0SA_Jy2RxwKaFM91Gm8WmOL1i_BH3FkuKRrEsVkxS5w4zStrh0sGvIO6L7B3bzC0ByKYOjpn5q_GZVzLqBKEkw` // replace this
+        Authorization: `Bearer ${import.meta.env.VITE_AUTH_FOR_COURSES}`
+ // replace this
       }
     });
 
@@ -129,7 +143,7 @@ const fetchCourseDetails = async (courseKey: string) => {
   try {
     const response = await axios.get(`/api/people_names?netid=${netid}`, {
       headers: {
-        Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0ODMzMjMzOSwiaWF0IjoxNzQ4MzIxNTM5LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.LdGiyXDLFmqdn3TT9kQ12NMi9uzAI95ztGuaGekn_Eg5o76h5B2vGzIVINEeA16gecAWC9aiGTbwBWnt1nd8lyzq3TQDnJcmSqC4pvdYT_er3S-4lexbdQzxCYUdBp81jwo4PXcOEo9RGgPwgT4rZa5_GXA4pT9xp-Trf6qNdijhu_CbUli4HeieRgdkLOsHUNz3jRunuM8fKDLxnX_iZbzr24TlqNzgPf42-JOARn649pTuMoG91XmTOpEYtZxurC6vxx4ObS1WrqYL4YkCKK4m2IoKlgTRSQDvyNSEQW4vqh8HBAWOP7wOL1s66drvwr3am3moNbIwd4wzxdp2iA`
+        Authorization: `Bearer ${import.meta.env.VITE_AUTH_FOR_COURSES}`
       }
     });
 
@@ -168,7 +182,7 @@ const fetchCourseDetails = async (courseKey: string) => {
         while (hasMore) {
           const response = await axios.get('/api/academic/sections', {
             headers: {
-              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0ODM2MDkyNiwiaWF0IjoxNzQ4MzUwMTI2LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.ipOgLYXlSSv7xtyrXwR2kuWcXx31eZF2YXt1TsASJeOqwIT77wcNNX3QafFQcnBU85EBzJ-B0xkQPKAFwF76ueLtK2gIakB_3u31Bcd4ziPUSsxQp3415IAOIthkK8YQMSkzsiS74DvIL_l2J0FhrNggd6-1fiKt_ejFVHGd_-av5-37p_2lZSRVubUz8-T5CYG6ATJCyjxUdklD3XKcIIatY8e7tg1qhsgTTdeohrn0LVvej1c_cTiOepNZJl4C0SA_Jy2RxwKaFM91Gm8WmOL1i_BH3FkuKRrEsVkxS5w4zStrh0sGvIO6L7B3bzC0ByKYOjpn5q_GZVzLqBKEkw`
+              Authorization: `Bearer ${import.meta.env.VITE_AUTH_FOR_COURSES}`
             },
             params: {
               'term.sis_term_code': termCode,
@@ -237,7 +251,7 @@ const fetchCourseDetails = async (courseKey: string) => {
         while (hasMore) {
           const response = await axios.get('/api/academic/courses', {
             headers: {
-              Authorization: `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0ODM2MDkyNiwiaWF0IjoxNzQ4MzUwMTI2LCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.ipOgLYXlSSv7xtyrXwR2kuWcXx31eZF2YXt1TsASJeOqwIT77wcNNX3QafFQcnBU85EBzJ-B0xkQPKAFwF76ueLtK2gIakB_3u31Bcd4ziPUSsxQp3415IAOIthkK8YQMSkzsiS74DvIL_l2J0FhrNggd6-1fiKt_ejFVHGd_-av5-37p_2lZSRVubUz8-T5CYG6ATJCyjxUdklD3XKcIIatY8e7tg1qhsgTTdeohrn0LVvej1c_cTiOepNZJl4C0SA_Jy2RxwKaFM91Gm8WmOL1i_BH3FkuKRrEsVkxS5w4zStrh0sGvIO6L7B3bzC0ByKYOjpn5q_GZVzLqBKEkw`
+              Authorization: `Bearer ${import.meta.env.VITE_AUTH_FOR_COURSES}`
             },
             params: {
               is_active: true,
@@ -489,15 +503,11 @@ useEffect(() => {
               
               </div>
               
-              <p className="prereqs" style={{ marginTop: '0px', textDecoration:'underline', color:'#66451C', fontFamily:'Inter' }}>Prerequisites: {meta.Prerequisites}</p>
+              {/* <p className="prereqs" style={{ marginTop: '0px', textDecoration:'underline', color:'#66451C', fontFamily:'Inter' }}>Prerequisites: {meta.Prerequisites}</p> */}
               {meta?.orc_description ? (
               <p
                 className="coursedescription"
-                style={{
-                  width: '700px',
-                  fontFamily: 'Inter',
-                  color: '#66451C'
-                }}
+                
                 dangerouslySetInnerHTML={{ __html: meta.orc_description }}
               />
             ) : (
@@ -506,11 +516,21 @@ useEffect(() => {
               </p>
             )}
 
-              <div>
+              <div className='crosslisted-container'>
                 <p className="crosslisted" style={{ marginTop:'10px', color:'#66451C', fontFamily:'Inter' }}>
                   Cross-listed Courses: {section.crosslist?.sections?.map(s => s.id).join(', ') || 'None'}
                 </p>
-                <p>hello</p>
+
+                <button
+                  className='bookmark-button'
+                  onClick={() => toggleBookmark(section.course_id)}
+                >
+                  <img
+                    src={bookmarkedCourses[section.course_id] ? bookmarkIcon : unbookmarkIcon}
+                    alt="bookmark toggle"
+                    className='bookmark-icon'
+                  />
+                </button>
               </div>
               
             </div>
@@ -601,7 +621,7 @@ const App: React.FC = () => {
         />
         <div className="column-layout">
           {columns.map((col, colIndex) => (
-            <div className="column" key={colIndex}>
+            <div className="course-column" key={colIndex}>
               {col.map(subject => (
                 <label key={subject}>
                   <input
