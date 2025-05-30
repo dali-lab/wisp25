@@ -17,7 +17,7 @@ const LandingPage: React.FC = () => {
   };
 
   return (
-    <div className="container">
+    <div className="landing-container">
       <nav className="navbar">
         <div className="hamburger" onClick={handleMenuToggle}>
           <MenuRoundedIcon sx={{ fontSize: 30 }} />
@@ -31,7 +31,7 @@ const LandingPage: React.FC = () => {
       </nav>
       {/* Pass the isOpen prop here */}
       <MenuBar isOpen={menuOpen} />
-      <div className="body">
+      <div className="landing-body">
         <h2>
           Find Your Courses. <br /> Build Your Schedule. <br /> Meet Your
           People.
