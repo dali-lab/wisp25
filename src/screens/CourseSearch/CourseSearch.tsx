@@ -123,11 +123,12 @@ const fetchCourseDetails = async (courseKey: string) => {
   try {
     const response = await axios.get(`/api/academic/courses/${courseKey}`, {
       headers: {
-        Authorization: `Bearer ${import.meta.env.VITE_AUTH_FOR_COURSES}`
+      Authorization: `Bearer ${import.meta.env.VITE_AUTH_FOR_COURSES}`
  // replace this
+        
       }
     });
-
+    
     setCourseDetails(prev => ({
       ...prev,
       [courseKey]: response.data,
@@ -147,6 +148,7 @@ const fetchCourseDetails = async (courseKey: string) => {
       }
     });
 
+    
     const entries = response.data;
 
     // Prefer active legal name, then any legal name, then first entry
@@ -194,6 +196,7 @@ const fetchCourseDetails = async (courseKey: string) => {
 
             }
           });
+          
 
           const data: Section[] = response.data;
           if (data.length > 0) {
@@ -240,6 +243,9 @@ const fetchCourseDetails = async (courseKey: string) => {
   
   //   fetchCourses();
   // }, []);
+
+  console.log("🔐 Loaded token:", import.meta.env.VITE_AUTH_FOR_COURSES);
+
 
   useEffect(() => {
     const fetchCourses = async () => {
