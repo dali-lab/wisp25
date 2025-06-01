@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import '../CourseSearch.css';
-import checkIcon from '../assets/check_icon.svg';
-import menuIcon from '../assets/menu_icon.svg';
-import dropDownIcon from '../assets/drop_.svg';
+import '../CourseSearch/CourseSearch.css';
+import checkIcon from '../../assets/check_icon.svg';
+import menuIcon from '../../assets/menu_icon.svg';
+import dropDownIcon from '../../assets/drop_.svg';
 import axios from 'axios';
 import dotenv from "dotenv";
 
@@ -54,7 +54,7 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
   useEffect(() => {
     axios.get('/api/academic/courses', {
       headers: {
-        "Authorization": `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmMDA3OW4zIiwiYXVkIjoiaHR0cHM6Ly9hcGkuZGFydG1vdXRoLmVkdSIsImlzcyI6Imh0dHBzOi8vYXBpLmRhcnRtb3V0aC5lZHUvYXBpL2p3dCIsIm5hbWUiOiJCb3BoYSBNLiBVbSIsImV4cCI6MTc0NDczMjMyMiwiaWF0IjoxNzQ0NzIxNTIyLCJlbWFpbCI6IkJvcGhhLk0uVW0uMjhAZGFydG1vdXRoLmVkdSJ9.GfAb36-RezqYvcMhlRE-WUFSmH78tnh92evKtlfsuPyfelYBSlo2E1mjEf1XIqE5wGuvTiM9uw0aoLI1JAPmvKGHgTiAfarsBKo7GKMv6GJ152RZRhhBUuFNWFe_ECwrog8lWxX0hicWLHLglrnH5RcxtGnDqq4lqSlM0iyHkG4QYeWDIhetvLGVrfH6AwbPOqdTuMoulABKU4Npmos94DSVH2s525IaOxi9f-GsfsdFvlRC1VDeI0wKNeNG06Sk_W0KUPpOAkDOOIHrSh5sMcXs3vbpgxIfYsVE96vvwG_RAqyZI47GgLt15Ul_m_SakbQvaY5Ngt4juIfgSeFXVw`
+        "Authorization": `Bearer ${process.env.AUTH_FOR_COURSES}`
       }
     })
     .then((response) => {

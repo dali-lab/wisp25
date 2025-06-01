@@ -1,6 +1,6 @@
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useState } from 'react';
-import '../screens/CourseLoadTester.css';
+import '../CourseLoadTester/CourseLoadTester.css';
 
 type Course = {
   id: string;
