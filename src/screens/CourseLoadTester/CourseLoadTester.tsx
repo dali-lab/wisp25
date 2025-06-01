@@ -1,6 +1,10 @@
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useState } from 'react';
+<<<<<<< HEAD
+import '../CourseLoadTester/CourseLoadTester.css';
+=======
 import './CourseLoadTester.css'; // Assuming you have a CSS file for styles
+>>>>>>> origin/main
 
 type Course = {
   id: string;

@@ -44,6 +44,14 @@ interface Section {
   id: string;
   course_id: string;
   name: string;
+  description: string;
+  instructor: string;
+  prereqs: string;
+  crossListed: string;
+  time: string;
+  credits: string;
+  nro?: string;
+  crn: string;
   subject_id: string;
   course_number: string;
   section_number: string;

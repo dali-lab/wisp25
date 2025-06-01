@@ -1,8 +1,15 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
+const apiKey = process.env.API_KEY;
+
+
 const express = require("express"); 
 const mongoose = require("mongoose");
 const axios = require("axios");
 const cors = require("cors");
 require("dotenv").config();
+
 
 const mongo_uri = process.env.MONGO_URI; 
 const port = process.env.PORT;
