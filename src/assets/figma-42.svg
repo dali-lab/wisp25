@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 <svg width="46" height="44" viewBox="0 0 46 44" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="45.4305" height="43.0924" rx="10" fill="#F3F2DE"/>
 <rect x="34.4355" y="20.8594" width="3.4752" height="23.4481" rx="1.7376" transform="rotate(90 34.4355 20.8594)" fill="#3B6838"/>
 </svg>
+=======
+<svg width="46" height="44" viewBox="0 0 46 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="45.4305" height="43.0924" rx="10" fill="#F3F2DE"/>
+<rect x="34.4355" y="20.8594" width="3.4752" height="23.4481" rx="1.7376" transform="rotate(90 34.4355 20.8594)" fill="#3B6838"/>
+</svg>
+>>>>>>> bopha/course-result

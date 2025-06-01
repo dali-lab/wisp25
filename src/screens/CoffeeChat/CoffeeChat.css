@@ -1,17 +1,17 @@
  @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Helvetica, 'Itim';
-}
+} */
 
-body {
+/* body {
     background-color: #EDECE4 !important;
     color: #000000;
     padding: 20px;
-}
+} */
 
 .container {
     max-width: 1200px;
