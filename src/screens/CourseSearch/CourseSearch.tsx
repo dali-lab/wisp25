@@ -5,6 +5,7 @@ import menuIcon from '../../assets/menu_icon.svg';
 import dropDownIcon from '../../assets/drop_.svg';
 import unbookmarkIcon from '../../assets/unbookmarked.svg';
 import bookmarkIcon from '../../assets/bookmarked.svg';
+import MenuBar from "../../components/MenuBar/MenuBar"; // Adjust path if needed
 
 
 
@@ -124,15 +125,12 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
 
 
 const fetchCourseDetails = async (courseKey: string) => {
-  // console.log("⏳ Fetching course details for:", courseKey);
-
   if (courseDetails[courseKey]) return;
 
   try {
     const response = await axios.get(`/api/academic/courses/${courseKey}`, {
       headers: {
       Authorization: `Bearer ${import.meta.env.VITE_AUTH_FOR_COURSES}`
- // replace this
         
       }
     });
@@ -169,11 +167,8 @@ const fetchCourseDetails = async (courseKey: string) => {
       : netid;
 
     setInstructorNames(prev => ({ ...prev, [netid]: name }));
-    console.log("👤 People API data for", netid, "=>", response.data);
 
-    console.log("✅ Instructor name fetched:", name);
   } catch (err) {
-    console.error(`❌ Failed to fetch name for ${netid}:`, err);
     setInstructorNames(prev => ({ ...prev, [netid]: netid }));
   }
 };
@@ -225,36 +220,6 @@ const fetchCourseDetails = async (courseKey: string) => {
   }, []);
   
   
-
-
-  
-  // useEffect(() => {
-  //   const fetchCourses = async () => {
-  //     try {
-  //       const response = await axios.get('/api/academic/courses', {
-  //         headers: {
-  //           Authorization: `Bearer YOUR_TOKEN_HERE`
-  //         }
-  //       });
-  
-  //       const metadataMap: Record<string, any> = {};
-  //       response.data.forEach((course: any) => {
-  //         const key = `${course.subject_id}.${course.course_number}-${course.term_code_effective}`;
-  //         metadataMap[key] = course;
-  //       });
-  
-  //       setCourseMetadata(metadataMap);
-  //     } catch (error) {
-  //       console.error("Failed to fetch course metadata:", error);
-  //     }
-  //   };
-  
-  //   fetchCourses();
-  // }, []);
-
-  console.log("🔐 Loaded token:", import.meta.env.VITE_AUTH_FOR_COURSES);
-
-
   useEffect(() => {
     const fetchCourses = async () => {
       try {
@@ -403,15 +368,6 @@ useEffect(() => {
       const courseKey = section.course_id;
       const meta = courseDetails[courseKey];
       const primaryInstructorNetid = section.instructors?.find(i => i.is_primary)?.netid ?? 'TBD';
-
-
-
-//       console.log("🔍 meta.distributives for", courseKey, ":", meta?.distributives);
-// console.log("🧪 typeof meta.distributives:", typeof meta?.distributives);
-//       console.log("🔎 courseKey:", courseKey);
-//       console.log("📦 courseDetails[courseKey]:", meta);
-//       console.log("💡 All courseDetails keys:", Object.keys(courseDetails));
-
     const hasSessions = section.schedule?.sessions?.length;
     const formattedSessions = hasSessions
       ? section.schedule!.sessions.map((session, idx) => {
