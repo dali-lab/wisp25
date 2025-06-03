@@ -4,10 +4,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import App from './screens/App';
 import '../src/styles/styles.scss';
-import dotenv from 'dotenv';
-dotenv.config();
+// import dotenv from 'dotenv';
+// dotenv.config();
 
-const apiKey = process.env.API_KEY;
+// const apiKey = process.env.API_KEY;
 
 const container = document.getElementById('main')!;
 const root = createRoot(container);
