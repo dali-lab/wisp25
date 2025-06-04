@@ -30,75 +30,12 @@ const LandingPage: React.FC = () => {
     setMenuOpen((prevState) => !prevState);
   };
 
-  // Fetch all courses on mount
-  useEffect(() => {
-    const fetchCourses = async () => {
-      setLoading(true);
-      try {
-        let page = 1;
-        let fetchedCourses: Course[] = [];
-        let hasMore = true;
-
-        while (hasMore) {
-          const response = await axios.get('/api/academic/courses', {
-            headers: {
-              Authorization: `Bearer ${import.meta.env.VITE_AUTH_FOR_COURSES}`
-            },
-            params: {
-              is_active: true,
-              pagesize: 500,
-              page,
-            }
-          });
-          const courses: Course[] = response.data;
-          if (courses.length > 0) {
-            fetchedCourses = [...fetchedCourses, ...courses];
-            page++;
-          } else {
-            hasMore = false;
-          }
-        }
-        setAllCourses(fetchedCourses);
-      } catch (error) {
-        console.error("Failed to fetch courses", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCourses();
-  }, []);
-
-  // Filter courses when search term changes
-  useEffect(() => {
-    if (!searchTerm.trim()) {
-      setFilteredCourses([]);
-      return;
-    }
-
-    const lower = searchTerm.toLowerCase();
-    const filtered = allCourses.filter(course =>
-      course.name.toLowerCase().includes(lower) ||
-      course.subject_id.toLowerCase().includes(lower) ||
-      course.course_number.toLowerCase().includes(lower)
-    ).slice(0, 10); // limit results for performance/readability
-
-    setFilteredCourses(filtered);
-  }, [searchTerm, allCourses]);
-
-  // Handle selecting a course (navigate to details page)
-  const handleSelectCourse = (id: string) => {
-    setSearchTerm("");           // Clear the search box
-    setFilteredCourses([]);      // Clear results
-    navigate(`/courseDetails/${id}`); // Adjust route according to your app
-  };
-
   return (
     <div className="landing-container">
       <nav className="navbar">
         <div className="hamburger" onClick={handleMenuToggle}>
           <MenuRoundedIcon sx={{ fontSize: 30 }} />
-        </div>
+        </div>  
         <h1 className="title">Big Green Planner</h1>
         <div className="savedCourses">
           <Link to="/savedCourses">
@@ -116,52 +53,6 @@ const LandingPage: React.FC = () => {
           Explore courses, plan your schedule, and connect with students who've
           been there.
         </p>
-        <div className="searchBar" style={{ position: "relative" }}>
-          <input
-            type="text"
-            placeholder="Search for course, subject, or professor"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            autoComplete="off"
-          />
-          <div className="searchIcon">
-            <SearchRoundedIcon sx={{ fontSize: 30 }} />
-          </div>
-
-          {/* Dropdown showing filtered courses */}
-          {filteredCourses.length > 0 && (
-            <ul className="search-results-dropdown" style={{
-              position: "absolute",
-              top: "100%",
-              left: 0,
-              right: 0,
-              maxHeight: "300px",
-              overflowY: "auto",
-              backgroundColor: "white",
-              border: "1px solid #ddd",
-              zIndex: 1000,
-              listStyle: "none",
-              margin: 0,
-              padding: 0,
-            }}>
-              {filteredCourses.map(course => (
-                <li
-                  key={course.id}
-                  onClick={() => handleSelectCourse(course.id)}
-                  style={{
-                    padding: "8px",
-                    borderBottom: "1px solid #eee",
-                    cursor: "pointer",
-                  }}
-                >
-                  {course.subject_id} {course.course_number} - {course.name}
-                </li>
-              ))}
-            </ul>
-          )}
-
-          {loading && <p style={{ marginTop: 5 }}>Loading courses...</p>}
-        </div>
         <div className="highlights">
           <div className="highlight">
             <Link to="/courseSearch">
