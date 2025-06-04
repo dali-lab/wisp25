@@ -40,7 +40,7 @@ const MenuBar: React.FC<MenuBarProps> = ({ isOpen }) => {
           </Link>
         </li>
         <li className="menuItem">
-          <Link to="/coffeeChat/register">
+          <Link to="/register">
             <PersonIcon sx={{ fontSize: 35 }} />
             <p>Register for Coffee Chats</p>
           </Link>

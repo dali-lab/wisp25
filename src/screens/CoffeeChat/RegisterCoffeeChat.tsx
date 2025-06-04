@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './RegisterCoffeeChat.css';
+import '../../assets/menu_icon.svg';
 
 const RegisterCoffeeChat = () => {
   const [page, setPage] = useState(1);
@@ -14,10 +15,13 @@ const RegisterCoffeeChat = () => {
 
   return (
     <div>
-      <div>
-        <h1 className="page-title-title"> Coffee Chat Connection </h1>
-      </div>
       <div className="container">
+        <nav className="nav">
+          
+        </nav>
+        <div>
+          <h1 className="page-title-title"> Coffee Chat Connection </h1>
+        </div>
         {page === 1 && (
           <div className="first-page">
             <div className="section-header"> Contact Info </div>
