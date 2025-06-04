@@ -1,12 +1,13 @@
- @import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
 .container {
-    max-width: 1200px;
+    max-width: 100vw;
     width: 100%;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     max-height:1200px;
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 header {
@@ -53,22 +54,31 @@ h1 {
     gap: 15px;
     margin-bottom: 20px;
     overflow-x: auto;
-    padding-bottom: 40px;
+    padding-bottom: 50px;
     max-width: 800px;
     width: 100%;
+    overflow-y: hidden;
+    max-height: 10px;
+    height: 100%;
 }
 
 .category {
     background-color: #D0E1D1;
     border: 1px solid #10300E;
     color: #10300E;
-    padding: 10px 16px;
+    padding: 0 16px;
     border-radius: 20px;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     white-space: nowrap;
     text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    height: 40px;
+    line-height: 1;
 }
 
 .category.active {
@@ -94,6 +104,8 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 253px;
+    height: 313;
 }
 
 .student-card:hover {

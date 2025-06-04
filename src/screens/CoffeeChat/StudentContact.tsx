@@ -7,9 +7,7 @@ const ContactCard: React.FC = ({ }) => {
   const { name, studentId } = location.state || {};
 
   return (
-    <div className="student-detail-container">
-      <h1 className="page-title">Coffee Chat Connection</h1>
-
+    <div className="contactCard">
       <div className="student-header">
         <span className="student-label">{name}</span>
       </div>
@@ -39,11 +37,12 @@ const StudentContact: React.FC = ({ }) => {
   const navigate = useNavigate();
   
   const handleBackClick = () => {
-    navigate('explorecoffeechat');
+    navigate('/coffeeChat');
   };
 
   return (
-    <div>
+    <div className="contact-container">
+      <h1 className="page-title">Coffee Chat Connection</h1>
       <ContactCard />
       <div>
         <button className="back-button"
