@@ -51,7 +51,7 @@ const CoffeeChat: React.FC = () => {
       id: 1,
       name: 'Student #1',
       major: 'Mathematics',
-      bio: 'I am currently studying math with a potential minor in International Relations. On campus, I am a tour guide and involved with the writing center.',
+      bio: 'I am currently studying math with a potential minor in Economics. On campus, I am a tour guide and involved with the writing center.',
     },
     {
       id: 2,
@@ -81,11 +81,11 @@ const CoffeeChat: React.FC = () => {
       id: 6,
       name: 'Student #6',
       major: 'Art History',
-      bio: 'Art History major with a minor in Museum Studies. Looking to discuss Renaissance art and potential internships at local galleries or museums.',
+      bio: 'Art History major with a minor in Latin Studies. Looking to discuss Renaissance art and potential internships at local galleries or museums.',
     },
   ];
   
-  const categories = ['All', 'Mathematics', 'Spanish', 'Philosophy', 'Physics', 'International Relations', 'Study Abroad', 'Psychology', 'Computer Science', 'Art History', 'Undecided'];
+  const categories = ['All', 'Mathematics', 'Spanish', 'Philosophy', 'Physics', 'Economics', 'Psychology', 'Computer Science', 'Art History', 'Undecided'];
 
   const filteredStudents = students.filter(student => {
     const matchesSearch = searchQuery === '' ||
