@@ -1,6 +1,6 @@
 import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
 import { useState } from 'react';
-import './CourseLoadTester.css'; // Assuming you have a CSS file for styles
+import '../CourseLoadTester/CourseLoadTester.css';
 
 type Course = {
   id: string;
@@ -81,60 +81,62 @@ const CourseLoadTester = () => {
   };
 
   return (
-    <div className="container">
-      <h2 className="title">Course Load Tester ⓘ</h2>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className="columns">
-          <Droppable droppableId="saved">
-            {(provided) => (
-              <div className="column" ref={provided.innerRef} {...provided.droppableProps}>
-                <h3>Saved Courses</h3>
-                {savedCourses.map((course, index) => (
-                  <Draggable draggableId={course.id} index={index} key={course.id}>
-                    {(provided) => (
-                      <div
-                        className="card" 
-                        ref={provided.innerRef} 
-                        {...provided.draggableProps} 
-                        {...provided.dragHandleProps}
-                        style={{...provided.draggableProps.style}}>
-                        <div className="card-title">{course.name}</div>
-                        <div className="book">📖</div>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
+    <div>
+      <div className="container">
+        <h2 className="title">Course Load Tester ⓘ</h2>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div className="columns">
+            <Droppable droppableId="saved">
+              {(provided) => (
+                <div className="column" ref={provided.innerRef} {...provided.droppableProps}>
+                  <h3>Saved Courses</h3>
+                  {savedCourses.map((course, index) => (
+                    <Draggable draggableId={course.id} index={index} key={course.id}>
+                      {(provided) => (
+                        <div
+                          className="card" 
+                          ref={provided.innerRef} 
+                          {...provided.draggableProps} 
+                          {...provided.dragHandleProps}
+                          style={{...provided.draggableProps.style}}>
+                          <div className="card-title">{course.name}</div>
+                          <div className="book">📖</div>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
 
-          <Droppable droppableId="load">
-            {(provided) => (
-              <div className="column" ref={provided.innerRef} {...provided.droppableProps}>
-                <h3>Course Load</h3>
-                {courseLoad.map((course, index) => (
-                  <Draggable draggableId={course.id} index={index} key={course.id}>
-                    {(provided) => (
-                      <div
-                        className="card"
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={{...provided.draggableProps.style}}>
-                        <div className="card-title">{course.name}</div>
-                        <div className="book">📖</div>
-                      </div>
-                    )}
-                  </Draggable>
-                ))}
-                {renderCourseLoadMessage()}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div>
-      </DragDropContext>
+            <Droppable droppableId="load">
+              {(provided) => (
+                <div className="column" ref={provided.innerRef} {...provided.droppableProps}>
+                  <h3>Course Load</h3>
+                  {courseLoad.map((course, index) => (
+                    <Draggable draggableId={course.id} index={index} key={course.id}>
+                      {(provided) => (
+                        <div
+                          className="card"
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={{...provided.draggableProps.style}}>
+                          <div className="card-title">{course.name}</div>
+                          <div className="book">📖</div>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {renderCourseLoadMessage()}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </div>
+        </DragDropContext>
+      </div>
     </div>
   );
 };

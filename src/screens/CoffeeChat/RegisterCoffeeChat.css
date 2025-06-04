@@ -1,26 +1,31 @@
-/* body {
-    background-color: #efeee7;
-    margin: 0;
-    padding: 0;
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #edece4;
+    height: 100vh;
+    width: 100%;
+    max-width: max-content;
+  }
+
+  .nav {
+    position: relative;
+    width: 100vw;
+    background-color: #edece4;
+    color: white;
     display: flex;
     align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+    padding: 25px 40px;
   }
-   */
-  .container {
-    max-width: 600px;
-    width: 100%;
-    padding: 20px;
-  }
-  
+
+
   .page-title-title {
     font-family: 'Itim';
     text-align: center;
     font-size: 50px;
     color: #2b4928;
     font-weight: 600;
-    margin-bottom: 16px;
+    margin-bottom: 30px;
   }
   
   .section-header {
@@ -49,6 +54,7 @@
     border-radius: 6px;
     width: 130px;
     text-align: center;
+    cursor:auto;
   }
   
   .form-input {

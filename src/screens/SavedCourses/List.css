@@ -1,0 +1,27 @@
+/* CourseList.css */
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
+
+.itim-regular {
+  font-family: "Itim", cursive;
+  font-weight: 70;
+  font-style: normal;
+}
+
+.course-list-saved {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.course-list-item {
+  border: 2px solid #66451c;
+  border-radius: 10px;
+  padding: 1rem;
+  background: #d0e1d1;
+  font-family: "Itim", cursive;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 20;
+  text-align: left;
+}

@@ -375,6 +375,7 @@ label {
   border-bottom: none;
 
 }
+
 .crosslisted{
   margin-top: 200px;
   text-decoration: underline;
@@ -406,7 +407,7 @@ label {
   width: fit-content;
   margin-top: 10px;
 }
-.figma-icon1{
+/* .figma-icon1{
   position: absolute;
   top: 25px;
   right: 22px;
@@ -419,7 +420,7 @@ label {
   right: 25px;
   width: 30px;
   height: 30px;
-}
+} */
 .App-logo {
   height: 40vmin;
   pointer-events: none;

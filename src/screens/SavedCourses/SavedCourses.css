@@ -1,0 +1,14 @@
+.content-scrollable {
+    flex: 1;
+    max-height: 800px;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+  
+  .background-color-saved {
+    background-color: #EDECE4;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  

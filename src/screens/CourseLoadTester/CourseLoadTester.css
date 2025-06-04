@@ -27,6 +27,8 @@
     min-height: 300px;
     border: 2px dashed #ccc;
     transition: background-color 0.3s ease;
+    max-width: 350px;
+    width: 100%;
   }
   .column:hover {
     background-color: #dde6d6;

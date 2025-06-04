@@ -5,6 +5,7 @@ import menuIcon from '../../assets/menu_icon.svg';
 import dropDownIcon from '../../assets/drop_.svg';
 import unbookmarkIcon from '../../assets/unbookmarked.svg';
 import bookmarkIcon from '../../assets/bookmarked.svg';
+import { saveCourse, isCourseSaved } from '@/utils/courseStorage';
 import MenuBar from "../../components/MenuBar/MenuBar"; // Adjust path if needed
 
 
@@ -13,6 +14,9 @@ import MenuBar from "../../components/MenuBar/MenuBar"; // Adjust path if needed
 // import menuIcon from 'assets/menu_icon.svg';
 // import dropDownIcon from 'assets/drop_.svg';
 import axios from 'axios';
+
+
+
 
 
 const formatTime = (time: string | null | undefined) => {
@@ -27,7 +31,7 @@ const formatTime = (time: string | null | undefined) => {
 };
 
 
-interface Instructor {
+export interface Instructor {
   is_primary: boolean;
   netid: string;
 }
@@ -41,10 +45,18 @@ interface Crosslist {
   sections: CrosslistedSection[];
 }
 
-interface Section {
+export interface Section {
   id: string;
   course_id: string;
   name: string;
+  description: string;
+  instructor: string;
+  prereqs: string;
+  crossListed: string;
+  time: string;
+  credits: string;
+  nro?: string;
+  crn: string;
   subject_id: string;
   course_number: string;
   section_number: string;
@@ -321,6 +333,11 @@ useEffect(() => {
     }));
   };
 
+  const handleSaveCourse = (course: Section) => {
+    saveCourse(course);
+    alert(`${course.id} saved!`);
+  };
+
   const removeSubject = (subject: string) => {
     setSelectedSubjects(prev => prev.filter(s => s !== subject));
   };
@@ -493,7 +510,7 @@ useEffect(() => {
                   Cross-listed Courses: {section.crosslist?.sections?.map(s => s.id).join(', ') || 'None'}
                 </p>
 
-                <button
+                {/* <button
                   className='bookmark-button'
                   onClick={() => toggleBookmark(section.course_id)}
                 >
@@ -502,7 +519,23 @@ useEffect(() => {
                     alt="bookmark toggle"
                     className='bookmark-icon'
                   />
-                </button>
+                </button> */}
+                <button
+                  className='bookmark-button'
+                  onClick={() => {
+                    if (!isCourseSaved(section.course_id)) {
+                      handleSaveCourse(section);
+                    }
+                  }}
+                    disabled={isCourseSaved(section.course_id)}
+                  >
+                    <img
+                      src={isCourseSaved(section.course_id) ? bookmarkIcon : unbookmarkIcon}
+                      alt="bookmark toggle"
+                      className='bookmark-icon'
+                    />
+                  </button>
+
               </div>
               
             </div>
