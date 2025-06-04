@@ -117,7 +117,12 @@ const CourseListSearch: React.FC<CourseListSearchProps> = ({ selectedSubjects, s
   const [courseMetadata, setCourseMetadata] = useState<Record<string, any>>({});
   const [instructorNames, setInstructorNames] = useState<Record<string, string>>({});  
   const [bookmarkedCourses, setBookmarkedCourses] = useState<Record<string, boolean>>({});
+    const [menuOpen, setMenuOpen] = useState<boolean>(false);
   
+    const handleMenuToggle = () => {
+      setMenuOpen((prevState) => !prevState);
+    };
+
   const toggleBookmark = (courseId: string) => {
   setBookmarkedCourses(prev => ({
     ...prev,
@@ -338,9 +343,9 @@ useEffect(() => {
   };
 
   return (
-    <div>
+    <div className='course-search-big-main-container'>
       <div className="menu-bar">
-        <img src={menuIcon} alt="Menu" className="menu-icon" />
+        <img src={menuIcon} alt="Menu" className="menu-icon" onClick={handleMenuToggle}/>
         <input
           className='course-search-bar'
           type="text"
@@ -349,11 +354,12 @@ useEffect(() => {
           onChange={(e) => setSearchQuery(e.target.value)}
         />
       </div>
+      <MenuBar isOpen={menuOpen} />
 
       <div className="selected-subjects-container">
         {selectedSubjects.map(subject => (
           <button key={subject} className="selected-subject-oval" onClick={() => removeSubject(subject)}>
-            <h3 className='subject-tag'>{subject}</h3> <h3 className='remove'>✕</h3>
+            <h4 className='subject-tag'>{subject}</h4> <h3 className='remove'>✕</h3>
           </button>
         ))}
       </div>
@@ -361,7 +367,7 @@ useEffect(() => {
       {selectedSubjects.map(subject => (
         <div key={subject} className='all-subject-container'>
           <button className={`subject-card ${openSubjects[subject] ? 'subject-card-open' : ''}`} onClick={() => toggleSubject(subject)}>
-            <h3 className={`subject-title ${openSubjects[subject] ? 'subject-title-open' : ''}`}>{subject}</h3>
+            <h4 className={`subject-title ${openSubjects[subject] ? 'subject-title-open' : ''}`}>{subject}</h4>
             <img src={dropDownIcon} alt="Dropdown" className={`drop-down ${openSubjects[subject] ? 'rotate' : ''}`} />
           </button>
 
@@ -408,10 +414,13 @@ useEffect(() => {
             
           >
 
-          <h1 className='course-title'>{section.name}</h1>
+          <h4 className='course-title'>{section.name}</h4>
           {/* <h3>{section.course_id}</h3> */}
           <div className='credit-icon-column'>
-            <h3 className='credit'>{section.course_number}</h3>
+            {/* <h4 className='credit'>{section.course_number}</h4> */}
+            <h4 className='credit'>{meta?.distributives?.length
+                    ? meta.distributives.map((d: any) => d.id).join(', ')
+                    : 'None'}</h4>
             <img
               src={dropDownIcon}
               alt="Dropdown"
@@ -445,6 +454,12 @@ useEffect(() => {
                   )}
                 </div>
               </div> */}
+              <div className='infobox'>
+                <div className='infobox-title'>Instructor</div>
+                <div className='infobox-content'>
+                  {instructorNames[primaryInstructorNetid] || primaryInstructorNetid}
+                </div>
+              </div>
               <div className='infobox'><div className='infobox-title'>Time</div><div className='infobox-content'>{formattedSessions}</div></div>
               <div className='infobox'><div className='infobox-title'>Building</div><div className='infobox-content'>{building}</div></div>
               <div className='infobox'><div className='infobox-title'>Room</div><div className='infobox-content'>{room}</div></div>
@@ -466,12 +481,7 @@ useEffect(() => {
                     : 'None'}
                 </div>
               </div>
-              <div className='infobox'>
-  <div className='infobox-title'>Instructor</div>
-  <div className='infobox-content'>
-    {instructorNames[primaryInstructorNetid] || primaryInstructorNetid}
-  </div>
-</div>
+              
 
 
 
@@ -547,6 +557,18 @@ const App: React.FC = () => {
   const [query, setQuery] = useState('');
   const [selectedSubjects, setSelectedSubjects] = useState<string[]>([]);
   const [isNextClicked, setIsNextClicked] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const handleMenuToggle = () => setMenuOpen(prev => !prev);
+
+  useEffect(() => {
+  const handleReset = () => {
+    setIsNextClicked(false);             
+    // setSelectedSubjects([]);
+  };
+
+  window.addEventListener("resetCourseSearch", handleReset);
+  return () => window.removeEventListener("resetCourseSearch", handleReset);
+}, []);
 
   const handleSubjectChange = (subject: string) => {
     setSelectedSubjects(prev =>
@@ -602,9 +624,10 @@ const App: React.FC = () => {
   ) : (
     <div>
       <div className="menu-bar">
-        <img src={menuIcon} alt="Menu" className="menu-icon" />
+        <img src={menuIcon} alt="Menu" className="menu-icon" onClick={handleMenuToggle}/>
         <div className="menu-title">Subjects</div>
       </div>
+      <MenuBar isOpen={menuOpen} />
 
       <div className="subject-box">
         <input

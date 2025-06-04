@@ -5,8 +5,8 @@
     padding: 1rem;
   }
   
-  .background-color {
-    background-color: #edece4;
+  .background-color-saved {
+    background-color: #EDECE4;
     display: flex;
     flex-direction: column;
     min-height: 100vh;

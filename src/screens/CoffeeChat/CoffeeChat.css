@@ -57,7 +57,7 @@ h1 {
     padding-bottom: 50px;
     max-width: 800px;
     width: 100%;
-    overflow-y: hidden;
+    overflow-y:hidden;
     max-height: 10px;
     height: 100%;
 }
@@ -73,7 +73,7 @@ h1 {
     cursor: pointer;
     white-space: nowrap;
     text-align: center;
-    display:flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     flex: 0 0 auto;
@@ -105,7 +105,7 @@ h1 {
     flex-direction: column;
     align-items: center;
     width: 253px;
-    height: 313;
+    height: 313px;
 }
 
 .student-card:hover {

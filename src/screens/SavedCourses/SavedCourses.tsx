@@ -5,6 +5,7 @@ import CourseDetailModal from "./CourseModal";
 import "../SavedCourses/SavedCourses";
 import List from "./List";
 import  {Section}  from "../CourseSearch/CourseSearch"
+import "./SavedCourses.css"
 
 const SavedCourses: React.FC = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("list");
@@ -12,7 +13,7 @@ const SavedCourses: React.FC = () => {
   const [savedCourses, setSavedCourses] = useState<Section[]>(getSavedCourses());
 
   return (
-    <div className="background-color">
+    <div className="background-color-saved">
       <Header viewMode={viewMode} setViewMode={setViewMode} />
       <div className="content-scrollable">
       <List
