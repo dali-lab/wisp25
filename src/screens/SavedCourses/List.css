@@ -7,7 +7,7 @@
   font-style: normal;
 }
 
-.course-list {
+.course-list-saved {
   display: flex;
   flex-direction: column;
   gap: 1rem;
