@@ -7,8 +7,8 @@
     max-height: 100vh;
     overflow-y:hidden;
   
-  .title {
-    text-align: center;
+  .title-loader {
+    text-align: justify;
     color: #387d4b;
     font-size: 40px;
     margin-top: 2rem;
@@ -142,4 +142,4 @@
   .info-icon {
     font-size: 20px;
     margin-top: 5px;
-  }
+  }}

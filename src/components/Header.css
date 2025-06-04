@@ -6,7 +6,19 @@
   text-align: center;
   font-style: regular;
   font-weight: 400;
-  background-color: #EDECE4;
+  background-color: #3b6838;
+  color:white;
+}
+
+.hamburger {
+  cursor: pointer;
+  margin: 5px 30px;
+  padding: 7px;
+  border: 3px solid white;
+  border-radius: 50%;
+  position: absolute;
+  left: 15px;
+  z-index: 1100;
 }
 
 .header {
@@ -14,6 +26,7 @@
   justify-content: center;
   align-items: center;
   padding: 1rem;
+  background-color: #3b6838;
 }
 
 .menu-button {

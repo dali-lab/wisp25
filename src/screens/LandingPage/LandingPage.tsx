@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import MenuBar from "../../components/MenuBar/MenuBar";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import BookmarkBorderRoundedIcon from "@mui/icons-material/BookmarkBorderRounded";
@@ -6,11 +7,24 @@ import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import PeopleOutlineRoundedIcon from "@mui/icons-material/PeopleOutlineRounded";
 import MenuBookRoundedIcon from "@mui/icons-material/MenuBookRounded";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './LandingPage.css'
+
+interface Course {
+  id: string;
+  subject_id: string;
+  course_number: string;
+  name: string;
+  // add more fields if needed
+}
 
 const LandingPage: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [allCourses, setAllCourses] = useState<Course[]>([]);
+  const [filteredCourses, setFilteredCourses] = useState<Course[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleMenuToggle = () => {
     setMenuOpen((prevState) => !prevState);
@@ -21,7 +35,7 @@ const LandingPage: React.FC = () => {
       <nav className="navbar">
         <div className="hamburger" onClick={handleMenuToggle}>
           <MenuRoundedIcon sx={{ fontSize: 30 }} />
-        </div>
+        </div>  
         <h1 className="title">Big Green Planner</h1>
         <div className="savedCourses">
           <Link to="/savedCourses">
@@ -29,7 +43,6 @@ const LandingPage: React.FC = () => {
           </Link>
         </div>
       </nav>
-      {/* Pass the isOpen prop here */}
       <MenuBar isOpen={menuOpen} />
       <div className="landing-body">
         <h2>
@@ -40,15 +53,6 @@ const LandingPage: React.FC = () => {
           Explore courses, plan your schedule, and connect with students who've
           been there.
         </p>
-        <div className="searchBar">
-          <input
-            type="text"
-            placeholder="Search for course, subject, or professor"
-          />
-          <div className="searchIcon">
-            <SearchRoundedIcon sx={{ fontSize: 30 }} />
-          </div>
-        </div>
         <div className="highlights">
           <div className="highlight">
             <Link to="/courseSearch">
@@ -73,5 +77,4 @@ const LandingPage: React.FC = () => {
     </div>
   );
 };
-
 export default LandingPage;

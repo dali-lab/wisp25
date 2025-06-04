@@ -83,7 +83,7 @@ const CourseLoadTester = () => {
   return (
     <div className="coursetest-container">
       <div className="titleHover">
-        <h1 className="title">Course Load Tester ⓘ</h1>
+        <h1 className="title.loader">Course Load Tester ⓘ</h1>
         <div className="hoverbox">Course Load Tester utilizes data from Dartmouth's Undergraduate Deans to flag potentially problematic course combinations.</div>
       </div>
       <DragDropContext onDragEnd={onDragEnd}>

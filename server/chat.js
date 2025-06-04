@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from 'mongoose';
 
 const coffeeSchema = new mongoose.Schema({
   id: Number,
@@ -13,4 +13,6 @@ const coffeeSchema = new mongoose.Schema({
   message: String,
 });
 
-module.exports = mongoose.model("Connection", coffeeSchema);
+const Connection = mongoose.model("Connection", coffeeSchema);
+
+export default Connection;  
