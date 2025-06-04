@@ -23,7 +23,7 @@ interface ListProps {
 
 const List: React.FC<ListProps> = ({ viewMode, onSelectCourse, courses=[] }) => {
   return (
-    <div className={`course-list ${viewMode}`}>
+    <div className={`course-list-saved ${viewMode}`}>
       {courses.map((course) => (
         <button
           key={course.id}

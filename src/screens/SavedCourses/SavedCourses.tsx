@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import Header from "../../components/Header";
 import { getSavedCourses, removeCourse } from "@/utils/courseStorage";
-import CourseDetailModal from "../../components/CourseModal";
+import CourseDetailModal from "./CourseModal";
 import "../SavedCourses/SavedCourses";
 import List from "./List";
-import  {Course}  from "../CourseSearch"
+import  {Section}  from "../CourseSearch/CourseSearch"
 
 const SavedCourses: React.FC = () => {
   const [viewMode, setViewMode] = useState<"grid" | "list">("list");
-  const [selectedCourse, setSelectedCourse] = useState<Course | any>(null);
-  const [savedCourses, setSavedCourses] = useState<Course[]>(getSavedCourses());
+  const [selectedCourse, setSelectedCourse] = useState<Section | any>(null);
+  const [savedCourses, setSavedCourses] = useState<Section[]>(getSavedCourses());
 
   return (
     <div className="background-color">
