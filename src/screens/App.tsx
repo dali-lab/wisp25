@@ -5,7 +5,6 @@ import CourseSearch from "../screens/CourseSearch/CourseSearch";
 import SavedCourses from "../screens/SavedCourses/SavedCourses";
 import CourseLoadTester from "../screens/CourseLoadTester/CourseLoadTester";
 import CoffeeChat from "../screens/CoffeeChat/CoffeeChat";
-import ExploreCoffeeChat from "../screens/CoffeeChat/ExploreCoffeeChat";
 import RegisterCoffeeChat from "../screens/CoffeeChat/RegisterCoffeeChat";
 import RegisterPlaceholder from "../screens/CoffeeChat/RegisterPlaceholder";
 import StudentContact from "../screens/CoffeeChat/StudentContact";
@@ -21,11 +20,10 @@ const App: React.FC = () => {
           <Route path="/courseSearch" element={<CourseSearch />} />
           {/* <Route path="/savedCourses" element={<SavedCourses />} /> */}
           <Route path="/courseLoadTester" element={<CourseLoadTester />} />
-          <Route path="/coffeeChat" element={<CoffeeChat />}>
-          <Route path="/coffeeChat/register" element={<RegisterCoffeeChat />} />
-          <Route path="/coffeeChat/explore" element={<ExploreCoffeeChat />} />
+          <Route path="/coffeeChat" element={<CoffeeChat />} />
+          <Route path="/register" element={<RegisterCoffeeChat />} />
+          {/* <Route path="/coffeeChat/explore" element={<ExploreCoffeeChat />} /> */}
           {/* <Route path="/registerCoffeeChatTest" element={< RegisterPlaceholder/>} /> */}
-          </Route>
           <Route path="/contact" element={<StudentContact />} />
         </Routes>
       </div>
