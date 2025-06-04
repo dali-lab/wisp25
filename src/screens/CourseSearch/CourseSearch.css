@@ -1,7 +1,5 @@
 body {
-  background-color: #EDECE4;
-  margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'Helvetica', sans-serif;
 }
 
 .subject-box {
@@ -182,6 +180,7 @@ label {
   position: relative;
   transition: background-color 0.3s ease, color 0.3s ease;
   margin-top: -2.7px;  border-bottom: none; 
+  font-family: Helvetica, sans-serif !important;
 }
 
 .subject-card:last-child {
@@ -292,7 +291,7 @@ label {
   font-size: 16px;
   color: #66451C;
   border: 3.5px solid #66451C;
-  background-color: #F3F2DE;
+  background-color: #ffffff;
   border-radius: 15px;
   outline: none;
   font-family: Arial, sans-serif;
@@ -344,6 +343,7 @@ label {
 
 .subject-tag{
   font-weight: normal;
+  font-size: 14px;
 }
 
 
@@ -483,4 +483,8 @@ label {
   color: #66451C;
   margin-top: 10px;
   line-height: 1.5;
+}
+
+.course-search-big-main-container {
+  font-family: Helvetica, sans-serif;
 }

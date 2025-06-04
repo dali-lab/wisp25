@@ -15,7 +15,13 @@ const MenuBar: React.FC<MenuBarProps> = ({ isOpen }) => {
   return (
     <div className={`menuBar ${isOpen ? "open" : "closed"}`}>
       <ul className="menuItems">
-        <li className="menuItem">
+        <li
+          className="menuItem"
+          onClick={() => {
+            if (window.location.pathname === "/courseSearch") {
+              window.dispatchEvent(new Event("resetCourseSearch"));
+            }
+          }}>
           <Link to="/courseSearch">
             <SearchRoundedIcon sx={{ fontSize: 35 }} />
             <p>Search Courses</p>
