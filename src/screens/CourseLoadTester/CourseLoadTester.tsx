@@ -81,15 +81,19 @@ const CourseLoadTester = () => {
   };
 
   return (
-    <div>
-      <div className="container">
-        <h2 className="title">Course Load Tester ⓘ</h2>
-        <DragDropContext onDragEnd={onDragEnd}>
-          <div className="columns">
+    <div className="coursetest-container">
+      <div className="titleHover">
+        <h1 className="title">Course Load Tester ⓘ</h1>
+        <div className="hoverbox">Course Load Tester utilizes data from Dartmouth's Undergraduate Deans to flag potentially problematic course combinations.</div>
+      </div>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className="columns">
+          <div className="column-drop">
+            <h3>Saved Courses</h3>
             <Droppable droppableId="saved">
               {(provided) => (
                 <div className="column" ref={provided.innerRef} {...provided.droppableProps}>
-                  <h3>Saved Courses</h3>
+
                   {savedCourses.map((course, index) => (
                     <Draggable draggableId={course.id} index={index} key={course.id}>
                       {(provided) => (
@@ -109,11 +113,13 @@ const CourseLoadTester = () => {
                 </div>
               )}
             </Droppable>
+          </div>
 
+          <div className="column-drop">
+          <h3>Course Load</h3>
             <Droppable droppableId="load">
               {(provided) => (
                 <div className="column" ref={provided.innerRef} {...provided.droppableProps}>
-                  <h3>Course Load</h3>
                   {courseLoad.map((course, index) => (
                     <Draggable draggableId={course.id} index={index} key={course.id}>
                       {(provided) => (
@@ -129,14 +135,14 @@ const CourseLoadTester = () => {
                       )}
                     </Draggable>
                   ))}
-                  {renderCourseLoadMessage()}
                   {provided.placeholder}
                 </div>
               )}
             </Droppable>
+            {renderCourseLoadMessage()}
           </div>
-        </DragDropContext>
-      </div>
+        </div>
+      </DragDropContext>
     </div>
   );
 };
